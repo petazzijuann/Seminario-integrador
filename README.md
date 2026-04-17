@@ -1,1 +1,2 @@
-# Seminario-integrador
+# Seminario-integrador: AgroControl
+AgroControl está diseñado para que el productor agropecuario pueda realizar el seguimiento detallado de sus unidades productivas (lotes) a lo largo de cada campaña. El sistema permitirá la gestión granular por hectárea, cultivo y variedad de semilla, centralizando el registro de todas las intervenciones técnicas y el consumo de insumos (fertilizantes, insecticidas, herbicidas, etc).
