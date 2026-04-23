@@ -1,0 +1,28 @@
+# Anotacines de segunda charla
+• Cuando se termina de cosechar la soja – cierra campaña (el lote)
+• Después de que se coseche la soja, y ese lote va a maíz, todos esos costos se atribuyen al maíz (Controlan malezas, se mantiene el campo limpio) hasta que se siembra el maíz.
+## **Tema Herencia**:
+Cultivos de invierno – Cultivos de verano en esta zona (Soja, trigo). En la campaña agricula hay doble cultivo, por ejemplo, trigo soja, hay que definir si analizar por lote, o por cultivo
+Maíz (verano) siembra: septiembre, cosecha: marzo
+Soja (vernao) siembra: noviembre, cosecha abril
+Trigo (invierno) siembre: fines de mayo principios de junio, cosecha principios de noviembre findes de diciembre.
+Cebada, avena, lenteja (invierno)
+Varían las condiciones.
+## **Proceso Principal**:
+1 - Elegir lote
+2 - sembrar
+3 - Aplicar fertilizante (Haciendo el estudio de tierra o no)
+4 - aplicar insumos (barbecho(dependiendo de las condiciones))
+5 - Monitorear Insectos (si hay, insecticida, si no, no aplicar)
+6 – Cosechar
+7 – sacar humedad, suciedad, aranda (Fuera del alcance porque es algo que pasa despues de poner sacar la cosecha)
+8 - cerras lote.
+
+**Cuando utilizar el barbecho (cuidar hasta la siembra):**
+•	Herbicida: tamaño de maleza, cobertura. Mas cobertura, tomar decisión. Estadio de maleza.
+•	Fertilizante: Análisis de suelo para saber la fertilidad del lote, y dependiendo de los minerales, los kilos a utilizar van a variar. SE HACE A LA SIEMBRA.
+•	Tema insectos se va manejando, utilizan bralex, si hay (por ejemplo) 1 chinche por metro de surco, se aplica, sino no
+## **Atributos importantes para las clases:**
+- Tener distancia entre surcos: 52.5 cm (Dato a guardar) como atributo de siembra, para saber cuanta semilla tengo por metro, y en base al distanciamiento entre surco, tengo las semillas por hectáreas (¡¡¡¡Importantísimo!!!!)
+- Super útil manejar el stock
+- Parámetros de cosecha: Kilos por hectárea, Humedad de la cosecha, rendimiento por lote
