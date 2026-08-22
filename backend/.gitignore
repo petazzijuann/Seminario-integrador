@@ -1,1 +1,8 @@
+# Credenciales de Supabase
 .env
+
+# Dependencias: se reinstalan con `pnpm install`, no se versionan
+node_modules/
+
+# Salida del build de TypeScript
+dist/
