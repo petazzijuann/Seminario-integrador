@@ -110,19 +110,14 @@ export const Insumo = defineEntity({
   routers ahí). Antes de mergear, traer lo último de `main` a la rama propia.
 - El `.env` NO se commitea (está en `.gitignore`): contiene las credenciales de Supabase.
 
-### ⚠️ Cuidado al hacer `git add` (pendiente de resolver)
+### Qué NO se versiona
 
-Hoy el `.gitignore` **solo ignora `.env`**, así que `node_modules/` quedó versionado:
-son ~14.600 archivos trackeados que cambian con cada `pnpm install`.
+El `.gitignore` ignora `.env`, `node_modules/` y `dist/`.
 
-- **NUNCA usar `git add .` ni `git commit -a`** en este repo. Un commit así arrastra
-  miles de archivos de `node_modules`, vuelve el PR imposible de revisar y genera
-  conflictos con todos los que hayan corrido `pnpm install`.
-- Commitear siempre con **rutas explícitas**, ej:
-  `git add src/lote src/semilla src/app.ts`
-- **Arreglo de fondo (a discutir con el grupo):** agregar `node_modules/` y `dist/` al
-  `.gitignore` y sacarlos del índice con `git rm -r --cached node_modules`. Conviene que
-  salga en un PR aparte y avisando, porque es un commit que "borra" 14k archivos.
+`node_modules` estuvo versionado por error hasta el PR #2 (~14.600 archivos que
+cambiaban con cada `pnpm install` y ensuciaban todos los PR). Ya se sacó del índice.
+Si al traer main te desaparece la carpeta `node_modules`, es esperado: corré
+`pnpm install` y listo.
 
 ---
 
