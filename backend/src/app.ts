@@ -2,6 +2,8 @@ import express, { type Express, type Request, type Response } from 'express';
 import { orm, syncSchema } from './shared/db/orm.js'
 import { RequestContext } from '@mikro-orm/core'
 import { insumosRouter } from './insumo/insumo.routes.js'
+import { loteRouter } from './lote/lote.routes.js'
+import { semillaRouter } from './semilla/semilla.routes.js'
 
 const app = express()
 app.use(express.json())
@@ -13,6 +15,8 @@ app.use((req, res, next) => {
 //antes de las rutas y middlewares de negocio
 
 app.use('/api/insumos', insumosRouter)
+app.use('/api/lotes', loteRouter)
+app.use('/api/semillas', semillaRouter)
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })
