@@ -4,6 +4,7 @@ import { RequestContext } from '@mikro-orm/core'
 import { insumosRouter } from './insumo/insumo.routes.js'
 import { loteRouter } from './lote/lote.routes.js'
 import { semillaRouter } from './semilla/semilla.routes.js'
+import { campaniasRouter } from './campania/campania.routes.js'
 
 const app = express()
 app.use(express.json())
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 app.use('/api/insumos', insumosRouter)
 app.use('/api/lotes', loteRouter)
 app.use('/api/semillas', semillaRouter)
+app.use('/api/campanias', campaniasRouter)
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })
