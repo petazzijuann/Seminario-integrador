@@ -1,6 +1,9 @@
 import {Request, Response} from 'express'
 import { orm } from '../shared/db/orm.js'
-import { Lote, ESTADOS_LOTE } from './lote.entity.js'
+import { Lote } from './lote.entity.js'
+
+export const ESTADOS_LOTE = ['Libre', 'En uso', 'Sembrado', 'Cosechado'] as const
+
 
 export class LoteController {
   async getAll(req: Request, res: Response) {
