@@ -6,6 +6,10 @@ import { loteRouter } from './lote/lote.routes.js'
 import { semillaRouter } from './semilla/semilla.routes.js'
 import { campaniasRouter } from './campania/campania.routes.js'
 import { siembrasRouter } from './siembra/siembra.routes.js';
+import { loteSemillaCampania } from './loteSemillaCampania/loteSemillaCampania.routes.js'
+import { laboresRouter } from './laborMantenimiento/laborMantenimiento.routes.js'
+import { mantenimientosRouter } from './detalleMantenimiento/detalleMantenimiento.routes.js'
+import { cosechasRouter } from './cosecha/cosecha.routes.js'
 
 const app = express()
 app.use(express.json())
@@ -21,6 +25,10 @@ app.use('/api/lotes', loteRouter)
 app.use('/api/semillas', semillaRouter)
 app.use('/api/campanias', campaniasRouter)
 app.use('/api/siembras', siembrasRouter)
+app.use('/api/lote-semilla-campanias', loteSemillaCampania)
+app.use('/api/labores', laboresRouter)
+app.use('/api/mantenimientos', mantenimientosRouter)
+app.use('/api/cosechas', cosechasRouter)
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })

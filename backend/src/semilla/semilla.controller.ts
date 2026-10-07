@@ -126,6 +126,42 @@ export class SemillaController {
     }
   }
 
+  // CUU2 alternativo 2.a: el ingeniero suma stock antes de registrar la siembra.
+  async agregarStock(req: Request, res: Response) {
+    try {
+      const id = Number(req.params.id)
+
+      if (isNaN(id)) {
+        return res.status(400).json({ message: 'Id inválido' })
+      }
+
+      const cantidad = Number(req.body.cantidad)
+      if (!Number.isInteger(cantidad) || cantidad <= 0) {
+        return res.status(400).json({ message: 'cantidad debe ser un entero mayor a 0' })
+      }
+
+      const semilla = await orm.em.findOne(Semilla, { id: id })
+
+      if (!semilla) {
+        return res.status(404).json({
+          message: 'Semilla no encontrada',
+        })
+      }
+
+      semilla.stock = semilla.stock + cantidad
+
+      await orm.em.flush()
+
+      return res.status(200).json(semilla)
+    } catch (error) {
+      console.error(error)
+
+      return res.status(500).json({
+        message: 'Error al agregar stock a la semilla',
+      })
+    }
+  }
+
   async delete(req: Request, res: Response) {
     try {
       const id = Number(req.params.id)
