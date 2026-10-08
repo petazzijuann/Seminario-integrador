@@ -37,9 +37,11 @@ Actor principal del sistema: **Ingeniero Agrónomo**.
 - `src/app.ts` llama a `syncSchema()` al arrancar, que ejecuta `orm.schema.update()`.
 - Esto significa que **las tablas se crean/actualizan automáticamente a partir de las
   entities** cada vez que se levanta el server. NO hay que correr migraciones a mano.
-- `schema.update()` solo agrega/modifica, **no borra** tablas existentes → es seguro
-  para la base compartida. NUNCA usar `schema.fresh()` ni `schema.drop()` (borrarían
-  datos de todo el grupo).
+- ⚠️ En MikroORM 7, `schema.update()` corre por defecto con `safe: false` y
+  `dropTables: true`: **borra las columnas que se sacan de una entity y las tablas del
+  schema `public` que no tengan entity**. Renombrar o quitar una propiedad = perder esa
+  columna con sus datos en la base compartida. Avisar al grupo antes de hacerlo.
+  NUNCA usar `schema.fresh()` ni `schema.drop()` (borrarían datos de todo el grupo).
 - Las entities se auto-descubren por patrón (`src/**/*.entity.ts`), no hay que
   registrarlas manualmente en la config.
 
