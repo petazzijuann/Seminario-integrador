@@ -34,8 +34,14 @@ app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })
 })
 
-await syncSchema()
+// En Vercel (serverless) no se sincroniza el schema ni se abre un puerto:
+// Vercel usa la app exportada. En local se mantiene el comportamiento de siempre.
+if (!process.env.VERCEL) {
+  await syncSchema()
 
-app.listen(3000, () => {
-  console.log('Server runnning on http://localhost:3000/')
-})
+  app.listen(3000, () => {
+    console.log('Server runnning on http://localhost:3000/')
+  })
+}
+
+export default app

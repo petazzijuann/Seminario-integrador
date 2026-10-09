@@ -42,8 +42,11 @@ Actor principal del sistema: **Ingeniero Agrónomo**.
   schema `public` que no tengan entity**. Renombrar o quitar una propiedad = perder esa
   columna con sus datos en la base compartida. Avisar al grupo antes de hacerlo.
   NUNCA usar `schema.fresh()` ni `schema.drop()` (borrarían datos de todo el grupo).
-- Las entities se auto-descubren por patrón (`src/**/*.entity.ts`), no hay que
-  registrarlas manualmente en la config.
+- Las entities se registran **a mano** en el array `entities` de
+  `src/shared/db/orm.ts` (no se usan globs porque en Vercel no funcionan).
+  Al crear una entity nueva, importarla y agregarla ahí.
+- El `syncSchema()` y el `app.listen` solo corren en local (`!process.env.VERCEL`).
+  En Vercel se usa el `export default app` de `app.ts`.
 
 ---
 
