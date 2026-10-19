@@ -10,6 +10,8 @@ import { loteSemillaCampania } from './loteSemillaCampania/loteSemillaCampania.r
 import { laboresRouter } from './laborMantenimiento/laborMantenimiento.routes.js'
 import { mantenimientosRouter } from './detalleMantenimiento/detalleMantenimiento.routes.js'
 import { cosechasRouter } from './cosecha/cosecha.routes.js'
+import { rindeRouter } from './rinde/rinde.routes.js'
+import { stockRouter } from './stock/stock.routes.js'
 
 const app = express()
 app.use(express.json())
@@ -29,6 +31,8 @@ app.use('/api/lote-semilla-campanias', loteSemillaCampania)
 app.use('/api/labores', laboresRouter)
 app.use('/api/mantenimientos', mantenimientosRouter)
 app.use('/api/cosechas', cosechasRouter)
+app.use('/api/rinde', rindeRouter)
+app.use('/api/stock', stockRouter)
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })
