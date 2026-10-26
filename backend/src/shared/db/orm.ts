@@ -14,6 +14,7 @@ import { LoteSemillaCampania } from '../../loteSemillaCampania/loteSemillaCampan
 import { Percance } from '../../percance/percance.entity.js'
 import { Semilla } from '../../semilla/semilla.entity.js'
 import { Siembra } from '../../siembra/siembra.entity.js'
+import { Usuario } from '../../usuario/usuario.entity.js'
 
 export const orm = await MikroORM.init({
   // Lista explícita (no globs): en Vercel los archivos sueltos no existen en runtime.
@@ -32,6 +33,7 @@ export const orm = await MikroORM.init({
     Percance,
     Semilla,
     Siembra,
+    Usuario,
   ],
   dbName: process.env.DB_NAME,
   clientUrl: process.env.DB_URL,
