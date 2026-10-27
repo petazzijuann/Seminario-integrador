@@ -5,7 +5,22 @@ import { DetalleConsumo } from '../detalleConsumo/detalleConsumo.entity.js'
 import { LoteSemillaCampania } from '../loteSemillaCampania/loteSemillaCampania.entity.js'
 import { LaborMantenimiento } from '../laborMantenimiento/laborMantenimiento.entity.js'
 import { Insumo } from '../insumo/insumo.entity.js'
+import { Siembra } from '../siembra/siembra.entity.js'
+import { Cosecha } from '../cosecha/cosecha.entity.js'
 import { parseFecha } from '../shared/fecha.js'
+
+
+async function cultivosCosechados(asignaciones: { id: number }[]) {
+  if (asignaciones.length === 0) return new Set<number>()
+
+  const siembras = await orm.em.find(Siembra, { loteSemillaCampania: { $in: asignaciones.map(a => a.id) } })
+  const cosechas = siembras.length ? await orm.em.find(Cosecha, { siembra: { $in: siembras } }) : []
+  const siembrasCosechadas = new Set(cosechas.map(c => c.siembra.id))
+
+  return new Set(
+    siembras.filter(s => siembrasCosechadas.has(s.id)).map(s => s.loteSemillaCampania.id),
+  )
+}
 
 // CUU3 - Registrar Labor: cada registro es una labor del catálogo aplicada
 // a un lote sembrado en una campaña abierta, con los insumos que consumió.
@@ -18,7 +33,8 @@ export class DetalleMantenimientoController {
         { lote: { estado: 'Sembrado' }, campania: { estado: 'Abierta' } },
         { populate: ['lote', 'semilla', 'campania'] },
       )
-      return res.status(200).json(asignaciones)
+      const cosechados = await cultivosCosechados(asignaciones)
+      return res.status(200).json(asignaciones.filter(a => !cosechados.has(a.id)))
     } catch (error) {
       console.error(error)
       return res.status(500).json({ message: 'Error al obtener los lotes sembrados' })
@@ -117,7 +133,11 @@ export class DetalleMantenimientoController {
       if (loteSemillaCampania.lote.estado !== 'Sembrado') {
         return res.status(409).json({ message: 'El lote no está Sembrado' })
       }
-
+      
+      if ((await cultivosCosechados([loteSemillaCampania])).size > 0) {
+        return res.status(409).json({ message: 'Ese cultivo ya fue cosechado' })
+      }
+      
       const labor = await orm.em.findOne(LaborMantenimiento, { id: Number(laborId) })
       if (!labor) {
         return res.status(404).json({ message: 'Labor no encontrada' })
