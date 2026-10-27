@@ -33,7 +33,8 @@ export class DetalleMantenimientoController {
         { lote: { estado: 'Sembrado' }, campania: { estado: 'Abierta' } },
         { populate: ['lote', 'semilla', 'campania'] },
       )
-      return res.status(200).json(asignaciones)
+      const cosechados = await cultivosCosechados(asignaciones)
+      return res.status(200).json(asignaciones.filter(a => !cosechados.has(a.id)))
     } catch (error) {
       console.error(error)
       return res.status(500).json({ message: 'Error al obtener los lotes sembrados' })
@@ -132,7 +133,11 @@ export class DetalleMantenimientoController {
       if (loteSemillaCampania.lote.estado !== 'Sembrado') {
         return res.status(409).json({ message: 'El lote no está Sembrado' })
       }
-
+      
+      if ((await cultivosCosechados([loteSemillaCampania])).size > 0) {
+        return res.status(409).json({ message: 'Ese cultivo ya fue cosechado' })
+      }
+      
       const labor = await orm.em.findOne(LaborMantenimiento, { id: Number(laborId) })
       if (!labor) {
         return res.status(404).json({ message: 'Labor no encontrada' })
