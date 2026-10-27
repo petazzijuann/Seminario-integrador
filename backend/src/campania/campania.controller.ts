@@ -8,7 +8,6 @@ import { Siembra } from '../siembra/siembra.entity.js'
 import { Cosecha } from '../cosecha/cosecha.entity.js'
 
 export class CampaniaController {
-
   // CUU5 paso 1: campañas (por defecto las Abiertas) con el estado de su lote.
   // ?estado=Cerrada para ver las cerradas, ?estado=todas para ver todas.
   async getAll(req: Request, res: Response) {
@@ -119,6 +118,63 @@ export class CampaniaController {
     } catch (error) {
       console.error(error)
       return res.status(500).json({ message: 'Error al asignar el lote' })
+    }
+  }
+
+async agregarSegundoCultivo(req: Request, res: Response) {
+    try {
+      // 1) Leer y validar los datos
+      const id = Number(req.params.id)
+      const loteId = Number(req.body.lote_id)
+      const semillaId = Number(req.body.semilla_id)
+
+      if (isNaN(id) || isNaN(loteId) || isNaN(semillaId)) {
+        return res.status(400).json({ message: 'id, lote_id y semilla_id deben ser numéricos' })
+      }
+
+      const campania = await orm.em.findOne(Campania, { id: id })
+      if (!campania) {
+        return res.status(404).json({ message: 'Campaña no encontrada' })
+      }
+      if (campania.estado !== 'Abierta') {
+        return res.status(409).json({ message: 'La campaña no está Abierta' })
+      }
+      
+      const asignaciones = await orm.em.find(
+        LoteSemillaCampania,
+        { campania: campania, lote: loteId },
+        { populate: ['lote'] },
+      )
+      if (asignaciones.length === 0) {
+        return res.status(404).json({ message: 'El lote no pertenece a esta campaña' })
+      }
+      if (asignaciones.length >= 2) {
+        return res.status(409).json({ message: 'El lote ya tiene dos cultivos en esta campaña' })
+      }
+      
+      const lote = asignaciones[0].lote
+      if (lote.estado !== 'Cosechado') {
+        return res.status(409).json({ message: 'El primer cultivo tiene que estar cosechado' })
+      }
+
+      const semilla = await orm.em.findOne(Semilla, { id: semillaId })
+      if (!semilla) {
+        return res.status(404).json({ message: 'Semilla no encontrada' })
+      }
+      if (semilla.estado !== 'Activa' || semilla.stock <= 0) {
+        return res.status(409).json({ message: 'La semilla no está Activa o no tiene stock' })
+      }
+      if (asignaciones.some(a => a.semilla.id === semilla.id)) {
+        return res.status(409).json({ message: 'Esa semilla ya se usó en este lote en esta campaña' })
+      }
+
+      const asignacion = orm.em.create(LoteSemillaCampania, { lote, semilla, campania })
+      lote.estado = 'En uso'
+      await orm.em.flush()
+      return res.status(201).json(asignacion)
+      } catch (error) {
+      console.error(error)
+      return res.status(500).json({ message: 'Error al asignar el segundo cultivo' })
     }
   }
 
