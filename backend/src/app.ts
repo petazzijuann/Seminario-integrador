@@ -14,6 +14,7 @@ import { rindeRouter } from './rinde/rinde.routes.js'
 import { stockRouter } from './stock/stock.routes.js'
 import { usuariosRouter } from './usuario/usuario.routes.js'
 import { rolesRouter } from './rol/rol.routes.js'
+import { percancesRouter } from './percance/percance.routes.js'
 
 const app = express()
 app.use(express.json())
@@ -37,6 +38,7 @@ app.use('/api/rinde', rindeRouter)
 app.use('/api/stock', stockRouter)
 app.use('/api/usuario', usuariosRouter)
 app.use('/api/rol', rolesRouter)
+app.use('/api/percances', percancesRouter)
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })
