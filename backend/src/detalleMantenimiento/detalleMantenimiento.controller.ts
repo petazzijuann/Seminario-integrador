@@ -142,6 +142,9 @@ export class DetalleMantenimientoController {
       if (!labor) {
         return res.status(404).json({ message: 'Labor no encontrada' })
       }
+      if (labor.estado === 'Inactiva') {
+        return res.status(409).json({ message: 'La labor está inactiva' })
+      }
 
       const repetida = await orm.em.findOne(DetalleMantenimiento, { loteSemillaCampania, labor, fecha: fechaLabor })
       if (repetida) {

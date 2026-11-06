@@ -7,5 +7,6 @@ export const LaborMantenimiento = defineEntity({
   properties: {
     descripcion: p.text(),
     costeBase: p.float(),
+    estado: p.enum(['Activa', 'Inactiva']).default('Activa'),
   },
 })
