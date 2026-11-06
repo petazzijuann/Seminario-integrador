@@ -14,6 +14,7 @@ import { rindeRouter } from './rinde/rinde.routes.js'
 import { stockRouter } from './stock/stock.routes.js'
 import { usuariosRouter } from './usuario/usuario.routes.js'
 import { rolesRouter } from './rol/rol.routes.js'
+import { percancesRouter } from './percance/percance.routes.js'
 import { authenticateToken } from './shared/auth/authenticateToken.js'
 import { authorizeOperationalAccess } from './shared/auth/authorizeOperationalAccess.js'
 
@@ -38,6 +39,7 @@ app.use('/api/cosechas', authenticateToken, authorizeOperationalAccess, cosechas
 app.use('/api/rinde', authenticateToken, authorizeOperationalAccess, rindeRouter)
 app.use('/api/stock', authenticateToken, authorizeOperationalAccess, stockRouter)
 app.use('/api/usuario', usuariosRouter)
+app.use('/api/percances', percancesRouter)
 app.use('/api/rol', authenticateToken, authorizeOperationalAccess, rolesRouter)
 
 app.use((_, res) => {
