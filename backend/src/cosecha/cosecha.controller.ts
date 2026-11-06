@@ -15,7 +15,12 @@ export class CosechaController {
         { loteSemillaCampania: { lote: { estado: 'Sembrado' }, campania: { estado: 'Abierta' } } },
         { populate: ['loteSemillaCampania.lote', 'loteSemillaCampania.semilla', 'loteSemillaCampania.campania'] },
       )
-      return res.status(200).json(siembras)
+      const cosechadas = siembras.length
+        ? await orm.em.find(Cosecha, { siembra: { $in: siembras } })
+        : []
+      const yaCosechadas = new Set(cosechadas.map(c => c.siembra.id))
+
+      return res.status(200).json(siembras.filter(s => !yaCosechadas.has(s.id)))
     } catch (error) {
       console.error(error)
       return res.status(500).json({ message: 'Error al obtener los lotes para cosechar' })
