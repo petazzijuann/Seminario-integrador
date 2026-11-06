@@ -59,3 +59,13 @@ Ctrl + C
 
 - Si no existe el archivo `.env`, la aplicación no podrá conectarse a la base de datos.
 - El proyecto usa pnpm como gestor de paquetes, por lo que se recomienda seguir ese flujo.
+
+## Autenticación
+
+Configura `JWT_SECRET` en el archivo `.env` con una clave aleatoria de al menos 32 bytes. No la subas al repositorio.
+
+El login (`POST /api/usuario/login`) y el registro (`POST /api/usuario`) son públicos. El resto de los endpoints requiere el token recibido al iniciar sesión:
+
+```text
+Authorization: Bearer <token>
+```

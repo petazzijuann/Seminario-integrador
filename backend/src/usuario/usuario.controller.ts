@@ -2,8 +2,9 @@ import { json, Request, Response } from 'express'
 import { orm } from '../shared/db/orm.js'
 import { Usuario } from './usuario.entity.js'
 import { Rol } from '../rol/rol.entity.js'
-import jwt from "jsonwebtoken"
+import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import { getJwtSecret } from '../shared/auth/jwt.js'
 
 export class UsuarioController {
 
@@ -48,14 +49,19 @@ export class UsuarioController {
       const token = jwt.sign(
         {
           id: usuario.id,
-          email: usuario.email
+          email: usuario.email,
+          roleId: usuario.rol.id
         },
-        process.env.JWT_SECRET!,
+        getJwtSecret(),
         {
-          expiresIn: "1d"
+          expiresIn: '1d',
+          algorithm: 'HS256'
         }
       );
-      return res.status(200).json({token, usuario: {id: usuario.id, email: usuario.email}});
+      return res.status(200).json({
+        token,
+        usuario: { id: usuario.id, nombre: usuario.nombre, email: usuario.email, rolId: usuario.rol.id },
+      });
     } catch (error) {
       console.error(error)
       return res.status(500).json({ message: 'Error al iniciar sesión' })
@@ -137,6 +143,34 @@ export class UsuarioController {
         })
         }
     }
+
+    async resetPassword(req: Request, res: Response) {
+        try {
+        const id = Number(req.params.id)
+        const { password } = req.body
+
+        if (!Number.isInteger(id) || id <= 0) {
+            return res.status(400).json({ message: 'Identificador de usuario inválido' })
+        }
+        if (typeof password !== 'string' || password.length === 0) {
+            return res.status(400).json({ message: 'La nueva contraseña es obligatoria' })
+        }
+
+        const usuario = await orm.em.findOne(Usuario, { id })
+        if (!usuario) {
+            return res.status(404).json({ message: 'Usuario no encontrado' })
+        }
+
+        usuario.password = await bcrypt.hash(password, 10)
+        await orm.em.flush()
+
+        return res.status(200).json({ message: 'Contraseña restablecida' })
+        } catch (error) {
+        console.error(error)
+        return res.status(500).json({ message: 'Error al restablecer la contraseña' })
+        }
+    }
+
 
     async remove(req: Request, res: Response) {
         try{

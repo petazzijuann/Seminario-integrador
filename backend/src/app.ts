@@ -14,6 +14,8 @@ import { rindeRouter } from './rinde/rinde.routes.js'
 import { stockRouter } from './stock/stock.routes.js'
 import { usuariosRouter } from './usuario/usuario.routes.js'
 import { rolesRouter } from './rol/rol.routes.js'
+import { authenticateToken } from './shared/auth/authenticateToken.js'
+import { authorizeOperationalAccess } from './shared/auth/authorizeOperationalAccess.js'
 
 const app = express()
 app.use(express.json())
@@ -24,19 +26,19 @@ app.use((req, res, next) => {
 })
 //antes de las rutas y middlewares de negocio
 
-app.use('/api/insumos', insumosRouter)
-app.use('/api/lotes', loteRouter)
-app.use('/api/semillas', semillaRouter)
-app.use('/api/campanias', campaniasRouter)
-app.use('/api/siembras', siembrasRouter)
-app.use('/api/lote-semilla-campanias', loteSemillaCampania)
-app.use('/api/labores', laboresRouter)
-app.use('/api/mantenimientos', mantenimientosRouter)
-app.use('/api/cosechas', cosechasRouter)
-app.use('/api/rinde', rindeRouter)
-app.use('/api/stock', stockRouter)
+app.use('/api/insumos', authenticateToken, authorizeOperationalAccess, insumosRouter)
+app.use('/api/lotes', authenticateToken, authorizeOperationalAccess, loteRouter)
+app.use('/api/semillas', authenticateToken, authorizeOperationalAccess, semillaRouter)
+app.use('/api/campanias', authenticateToken, authorizeOperationalAccess, campaniasRouter)
+app.use('/api/siembras', authenticateToken, authorizeOperationalAccess, siembrasRouter)
+app.use('/api/lote-semilla-campanias', authenticateToken, authorizeOperationalAccess, loteSemillaCampania)
+app.use('/api/labores', authenticateToken, authorizeOperationalAccess, laboresRouter)
+app.use('/api/mantenimientos', authenticateToken, authorizeOperationalAccess, mantenimientosRouter)
+app.use('/api/cosechas', authenticateToken, authorizeOperationalAccess, cosechasRouter)
+app.use('/api/rinde', authenticateToken, authorizeOperationalAccess, rindeRouter)
+app.use('/api/stock', authenticateToken, authorizeOperationalAccess, stockRouter)
 app.use('/api/usuario', usuariosRouter)
-app.use('/api/rol', rolesRouter)
+app.use('/api/rol', authenticateToken, authorizeOperationalAccess, rolesRouter)
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })
