@@ -8,7 +8,6 @@ import { parseFecha } from '../shared/fecha.js'
 
 
 export class SiembraController {
-  // CUU2 paso 1: lotes "En uso" de campañas abiertas, con la semilla asignada.
   async lotesDisponibles(req: Request, res: Response) {
     try {
       const asignaciones = await orm.em.find(
@@ -16,13 +15,16 @@ export class SiembraController {
         { lote: { estado: 'En uso' }, campania: { estado: 'Abierta' } },
         { populate: ['lote', 'semilla', 'campania'] },
       )
-      return res.status(200).json(asignaciones)
+      const sembradas = asignaciones.length
+        ? await orm.em.find(Siembra, { loteSemillaCampania: { $in: asignaciones } })
+        : []
+      const yaSembradas = new Set(sembradas.map(s => s.loteSemillaCampania.id))
+      return res.status(200).json(asignaciones.filter(a => !yaSembradas.has(a.id)))
     } catch (error) {
       console.error(error)
       return res.status(500).json({ message: 'Error al obtener los lotes en uso' })
     }
   }
-
   async getAll(req: Request, res: Response) {
     try {
       const siembras = await orm.em.find(Siembra, {}, {
