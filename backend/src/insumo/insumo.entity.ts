@@ -7,6 +7,7 @@ export const Insumo = defineEntity({
   properties: {
     nombre: p.string(),
     stock: p.integer(),
+    estado: p.enum(['Activa', 'Inactiva']).default('Activa'),
     precioUnitario: p.decimal(),
   },
 })
