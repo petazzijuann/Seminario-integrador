@@ -1818,12 +1818,12 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-09 Consultar Asistente",
 "titulo": "Camino Básico",
-"texto": "1. El usuario abre el chat. El sistema muestra el panel del asistente con la conversación de la sesión actual, si existe.\n2. El usuario escribe su consulta y la envía. El sistema muestra el mensaje, verifica que trate sobre AgroControl, reúne la documentación y los datos necesarios, y muestra la respuesta del asistente. [REPETIR MIENTRAS EL USUARIO TENGA CONSULTAS]\n3. El usuario cierra el chat. El sistema oculta el panel y conserva la conversación mientras no se recargue la página ni se cierre la sesión.",
+"texto": "1. El usuario abre el chat. El sistema muestra el panel del asistente con la conversación de la sesión actual, si existe.\n2. El usuario escribe su consulta y la envía. El sistema muestra el mensaje, verifica que trate sobre AgroControl, reúne, según la pantalla en la que se encuentra el usuario, la documentación y los datos necesarios, y muestra la respuesta del asistente. [REPETIR MIENTRAS EL USUARIO TENGA CONSULTAS]\n3. El usuario cierra el chat. El sistema oculta el panel y conserva la conversación mientras no se recargue la página ni se cierre la sesión.",
 "peso": 1.0,
 "id": 125,
 "conceptos": {
 "cu:09": 3,
-"ent:usuario": 4
+"ent:usuario": 5
 }
 },
 {
@@ -2165,11 +2165,11 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Requerimientos",
 "titulo": "Requerimientos funcionales",
-"texto": "RF-18 | El asistente debe poder consultar stock, lotes, campañas, labores, siembras, cosechas, percances y rinde, sin modificar datos ni acceder a los usuarios. | CU-09\nRF-19 | El asistente debe avisar al Productor que su rol solo permite consultar cuando pregunte cómo cargar o modificar información. | CU-09\nRF-20 | El sistema no debe almacenar las conversaciones. | CU-09",
+"texto": "RF-18 | El asistente debe poder consultar stock, lotes, campañas, labores, siembras, cosechas, percances y rinde, sin modificar datos ni acceder a los usuarios. | CU-09\nRF-19 | El asistente debe avisar al Productor que su rol solo permite consultar cuando pregunte cómo cargar o modificar información. | CU-09\nRF-20 | El sistema no debe almacenar las conversaciones. | CU-09\nRF-21 | El asistente debe responder dónde se encuentra cada función del sistema y considerar la pantalla en la que se encuentra el usuario. | CU-09",
 "peso": 0.8,
 "id": 151,
 "conceptos": {
-"cu:09": 2,
+"cu:09": 3,
 "cu:11": 1,
 "ent:lote": 1,
 "ent:campania": 1,
@@ -2177,7 +2177,7 @@ export const GRAFO: Grafo = {
 "ent:labor": 1,
 "ent:cosecha": 1,
 "ent:percance": 1,
-"ent:usuario": 2,
+"ent:usuario": 3,
 "con:stock": 1,
 "con:rinde": 1
 }
