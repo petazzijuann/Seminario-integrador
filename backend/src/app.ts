@@ -39,7 +39,7 @@ app.use('/api/cosechas', authenticateToken, authorizeOperationalAccess, cosechas
 app.use('/api/rinde', authenticateToken, authorizeOperationalAccess, rindeRouter)
 app.use('/api/stock', authenticateToken, authorizeOperationalAccess, stockRouter)
 app.use('/api/usuario', usuariosRouter)
-app.use('/api/percances', percancesRouter)
+app.use('/api/percances', authenticateToken, authorizeOperationalAccess, percancesRouter)
 app.use('/api/rol', authenticateToken, authorizeOperationalAccess, rolesRouter)
 
 app.use((_, res) => {

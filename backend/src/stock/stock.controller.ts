@@ -47,6 +47,7 @@ export class StockController {
         insumos: insumos.map((i) => ({
           id: i.id,
           nombre: i.nombre,
+          estado: i.estado,
           stock: i.stock,
           precioUnitario: Number(i.precioUnitario),
           ...(usoInsumos.get(i.id) ?? { usos: 0, consumido: 0 }),
