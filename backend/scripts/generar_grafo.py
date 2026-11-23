@@ -183,6 +183,26 @@ for carpeta, patron, tipo, peso in FUENTES:
             for t in partir(cuerpo):
                 fragmentos.append(dict(fuente=nombre, titulo=rotulo.rstrip(':'), texto=t, peso=peso))
 
+# Guía de pantallas: cada '## Pantalla [ruta]' y sus temas '###'.
+pantallas, tema, cuerpo = {}, '', []
+with open(os.path.join(os.path.dirname(__file__), '..', 'src', 'chat', 'pantallas.md'), encoding='utf8') as s:
+    lineas = [l.strip() for l in s] + ['## fin [/fin]']
+pantalla = ruta = ''
+for l in lineas:
+    if l.startswith('##'):
+        if tema:
+            for t in partir(cuerpo):
+                fragmentos.append(dict(fuente='Guía de pantallas', titulo=f'{pantalla} > {tema}', texto=t, peso=1.4, ruta=ruta))
+        tema, cuerpo = '', []
+        if l.startswith('###'):
+            tema = l.lstrip('# ')
+        else:
+            pantalla, ruta = re.match(r'## (.+) \[(.+)\]$', l).groups()
+            if ruta not in ('/*', '/fin'):
+                pantallas[ruta] = pantalla
+    elif l and tema:
+        cuerpo.append(l)
+
 # Anotaciones de las charlas con el ingeniero agrónomo (raíz del repo).
 for nota in sorted(glob.glob(os.path.join(os.path.dirname(__file__), '..', '..', 'Anotaciones*.md'))):
     titulo, cuerpo = '', []
@@ -212,6 +232,7 @@ for a, b in RELACIONES:
     vecinos[b].append(a)
 grafo = dict(
     fragmentos=fragmentos,
+    pantallas=pantallas,
     conceptos={c: dict(nombre=n, alias=[norm(a) for a in al], vecinos=vecinos[c]) for c, (n, al) in CONCEPTOS.items()},
 )
 with open(SALIDA, 'w', encoding='utf8', newline='\n') as s:

@@ -74,4 +74,5 @@ Authorization: Bearer <token>
 
 - `POST /api/chat` (los 3 roles). Necesita `GROQ_API_KEY` en el `.env` y en Vercel. Opcionales: `GROQ_MODELO_RESPUESTA` y `GROQ_MODELO_VERIFICACION`.
 - Responde con el grafo de la documentación (`src/chat/grafo.ts`) y consultas de solo lectura (`src/chat/consultas.ts`).
-- Si cambia la documentación, regenerar el grafo: `python scripts/generar_grafo.py <carpeta de documentación>` (requiere `python-docx` y `pymupdf`).
+- Conoce las pantallas por `src/chat/pantallas.md`: si cambia una pantalla del front, actualizarla ahí.
+- Si cambian esa guía o la documentación, regenerar el grafo: `python scripts/generar_grafo.py <carpeta de documentación>` (requiere `python-docx` y `pymupdf`).

@@ -7,10 +7,12 @@ export interface Fragmento {
   texto: string
   peso: number
   conceptos: Record<string, number>
+  ruta?: string // solo la guía de pantallas
 }
 
 export interface Grafo {
   fragmentos: Fragmento[]
+  pantallas: Record<string, string> // ruta -> nombre
   conceptos: Record<string, { nombre: string; alias: string[]; vecinos: string[] }>
 }
 
@@ -28,7 +30,8 @@ const VACIAS = new Set(
 export const normalizar = (texto: string) => texto.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
 
 // Raíz aproximada: alcanza para juntar plurales y conjugaciones frecuentes.
-const raiz = (p: string) => base(p).replace(/^siembr/, 'sembr').replace(/^cierr/, 'cerr')
+const VERBO = /^(cre|carg|elimin|borr|modific|registr|asign|cambi|agreg|reactiv)(o|a|as|an|ar|e|es|en|amos)$/
+const raiz = (p: string) => VERBO.exec(p)?.[1] ?? base(p).replace(/^siembr/, 'sembr').replace(/^cierr/, 'cerr')
 const base = (p: string) => (p.length > 5 ? p.replace(/(ciones|cion|ando|iendo|ados|adas|ado|ada|ar|er|ir|es|s|o|a|e)$/, '') : p.replace(/s$/, ''))
 
 const palabras = (texto: string) =>
@@ -87,7 +90,14 @@ function mejorFragmentoCon(palabra: string, consulta: string[]) {
 
 const capitulo = (f: Fragmento) => `${f.fuente}|${f.titulo.split(' > ')[0]}`
 
-export function buscarFragmentos(pregunta: string) {
+// Nombre de la pantalla donde está el usuario, si la ruta es una de las conocidas.
+export const nombrePantalla = (ruta: unknown) => (typeof ruta === 'string' && Object.keys(GRAFO.pantallas).includes(ruta) ? GRAFO.pantallas[ruta] : null)
+
+const HABLA_DE_LA_PANTALLA = /\b(aca|aqui|esta pantalla|este boton|esta seccion|esta tabla|este campo|esto)\b/
+
+// `ruta`: pantalla actual. Suma a sus fragmentos, y mucho más si la pregunta habla de "acá" o "esta pantalla".
+export function buscarFragmentos(pregunta: string, ruta: string | null = null) {
+  const bonoRuta = HABLA_DE_LA_PANTALLA.test(normalizar(pregunta)) ? 12 : 1.5
   const consulta = [...new Set(palabras(pregunta))]
   const conceptos = conceptosDe(pregunta)
 
@@ -106,7 +116,7 @@ export function buscarFragmentos(pregunta: string) {
   for (const { f, puntos } of iniciales) mejorDelCapitulo.set(capitulo(f), Math.max(mejorDelCapitulo.get(capitulo(f)) ?? 0, puntos))
 
   const puntuados = iniciales
-    .map(({ f, puntos }) => ({ f, puntos: puntos + 0.35 * mejorDelCapitulo.get(capitulo(f))! }))
+    .map(({ f, puntos }) => ({ f, puntos: puntos + 0.35 * mejorDelCapitulo.get(capitulo(f))! + (ruta && f.ruta === ruta ? bonoRuta : 0) }))
     .filter((x) => x.puntos > 1)
     .sort((a, b) => b.puntos - a.puntos)
 

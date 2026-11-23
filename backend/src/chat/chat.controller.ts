@@ -21,11 +21,11 @@ function superaLimite(usuarioId: number) {
 const esTurno = (t: any): t is Turno => (t?.role === 'user' || t?.role === 'assistant') && typeof t.content === 'string'
 
 export class ChatController {
-  // POST /api/chat  { message, history?: [{ role: 'user' | 'assistant', content }] }  ->  { reply }
+  // POST /api/chat  { message, history?: [{ role: 'user' | 'assistant', content }], route?: pantalla actual }  ->  { reply }
   // La conversación no se guarda: el front manda los últimos turnos para dar contexto.
   async enviar(req: Request, res: Response) {
     try {
-      const { message, history = [] } = req.body ?? {}
+      const { message, history = [], route } = req.body ?? {}
 
       if (typeof message !== 'string' || !message.trim()) {
         return res.status(400).json({ message: 'El mensaje es obligatorio' })
@@ -50,7 +50,7 @@ export class ChatController {
         .slice(-MAX_HISTORIAL)
         .map((t) => ({ role: t.role, content: t.content.slice(0, MAX_TURNO) }))
 
-      const reply = await responder(message.trim(), historial, usuario.roleId)
+      const reply = await responder(message.trim(), historial, usuario.roleId, typeof route === 'string' ? route : null)
       return res.status(200).json({ reply })
     } catch (error) {
       console.error(error)
