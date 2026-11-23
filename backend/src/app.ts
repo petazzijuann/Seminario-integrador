@@ -15,7 +15,9 @@ import { stockRouter } from './stock/stock.routes.js'
 import { usuariosRouter } from './usuario/usuario.routes.js'
 import { rolesRouter } from './rol/rol.routes.js'
 import { percancesRouter } from './percance/percance.routes.js'
+import { chatRouter } from './chat/chat.routes.js'
 import { authenticateToken } from './shared/auth/authenticateToken.js'
+import { authorizeAnyRole } from './shared/auth/authorizeAnyRole.js'
 import { authorizeOperationalAccess } from './shared/auth/authorizeOperationalAccess.js'
 
 const app = express()
@@ -40,6 +42,7 @@ app.use('/api/rinde', authenticateToken, authorizeOperationalAccess, rindeRouter
 app.use('/api/stock', authenticateToken, authorizeOperationalAccess, stockRouter)
 app.use('/api/usuario', usuariosRouter)
 app.use('/api/percances', authenticateToken, authorizeOperationalAccess, percancesRouter)
+app.use('/api/chat', authenticateToken, authorizeAnyRole, chatRouter)
 app.use('/api/rol', authenticateToken, authorizeOperationalAccess, rolesRouter)
 
 app.use((_, res) => {
