@@ -60,16 +60,18 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Manual de usuario",
 "titulo": "1. Introducción > 1.4 Novedades de esta versión",
-"texto": "Novedad | Qué cambia para usted | Sección\nAsistente Agrobot | Puede consultar a un asistente por chat desde cualquier pantalla, con cualquier rol. | 13\nInsumos | Accesos directos para editar semillas e insumos. Si los datos no se pueden cargar, los indicadores muestran “—”. | 10\nRinde | Si ninguna campaña coincide con los filtros, el sistema lo avisa. | 11",
+"texto": "Novedad | Qué cambia para usted | Sección\nAsistente Agrobot | Puede consultar a un asistente por chat desde cualquier pantalla, con cualquier rol. | 13\nInsumos | Accesos directos para editar semillas e insumos. Solo se consideran los activos. Si los datos no se pueden cargar, los indicadores muestran “—”. | 10\nRinde | Si ninguna campaña coincide con los filtros, el sistema lo avisa. | 11\nCatálogos | Se pueden dar de baja y reactivar semillas, insumos y labores. | 10.1",
 "peso": 1.3,
 "id": 3,
 "conceptos": {
 "cu:09": 3,
-"ent:semilla": 1,
-"ent:insumo": 2,
+"ent:semilla": 2,
+"ent:insumo": 3,
 "ent:campania": 1,
+"ent:labor": 1,
 "ent:usuario": 2,
-"con:rinde": 1
+"con:rinde": 1,
+"pan:catalogos": 3
 }
 },
 {
@@ -96,7 +98,7 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Manual de usuario",
 "titulo": "2. Acceso al sistema > 2.2 Barra de navegación",
-"texto": "Use la barra de navegación superior para moverse entre las secciones que correspondan a la etapa en que se encuentra la producción (Figura 3). Al hacer clic en “AgroControl” vuelve a la pantalla de bienvenida.\nLa barra de navegación tiene estas secciones:\nSección | Para qué se usa | Caso de uso\n“Lotes” | Ver los lotes y su estado. Desde aquí se accede a “Asignar lote”, para crear una campaña nueva. | CUU1\n“Siembras” | Registrar la siembra de un lote en uso. Desde aquí se accede a “Percance general”. | CUU2\n“Labores” | Registrar una labor de mantenimiento en un lote sembrado. | CUU3\n“Cosechas” | Registrar la cosecha de un lote sembrado. | CUU4\n“Campañas” | Cerrar una campaña abierta o agregar un segundo cultivo. | CUU5\n“Insumos” | Consultar el stock de semillas e insumos. | CUU11\n“Rinde” | Consultar los resultados de las campañas cerradas. | CUU10\n“Catálogos” | Consultar y cargar semillas, insumos y labores de mantenimiento. | —\n“Usuarios” | Crear cuentas y reiniciar contraseñas. Solo aparece para el rol Admin. | —",
+"texto": "Use la barra de navegación superior para moverse entre las secciones que correspondan a la etapa en que se encuentra la producción (Figura 3). Al hacer clic en “AgroControl” vuelve a la pantalla de bienvenida.\nLa barra de navegación tiene estas secciones:\nSección | Para qué se usa | Caso de uso\n“Lotes” | Ver los lotes y su estado. Desde aquí se accede a “Asignar lote”, para crear una campaña nueva. | CUU1\n“Siembras” | Registrar la siembra de un lote en uso. Desde aquí se accede a “Percance general”. | CUU2\n“Labores” | Registrar una labor de mantenimiento en un lote sembrado. | CUU3\n“Cosechas” | Registrar la cosecha de un lote sembrado. | CUU4\n“Campañas” | Cerrar una campaña abierta o agregar un segundo cultivo. | CUU5\n“Insumos” | Consultar el stock de semillas e insumos. | CUU11\n“Rinde” | Consultar los resultados de las campañas cerradas. | CUU10\n“Catálogos” | Consultar, cargar, modificar, dar de baja y reactivar semillas, insumos y labores de mantenimiento. | —\n“Usuarios” | Crear cuentas y reiniciar contraseñas. Solo aparece para el rol Admin. | —",
 "peso": 1.3,
 "id": 6,
 "conceptos": {
@@ -119,7 +121,7 @@ export const GRAFO: Grafo = {
 "con:doble": 1,
 "con:stock": 1,
 "con:rinde": 1,
-"pan:catalogos": 1,
+"pan:catalogos": 3,
 "pan:insumos": 1,
 "pan:rinde": 1,
 "est:enuso": 1,
@@ -670,24 +672,59 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Manual de usuario",
 "titulo": "10. Consultar stock (Insumos)",
-"texto": "Sin consumo | Tiene stock, pero todavía no se usó, así que no se puede estimar para cuánto alcanza.\nEsta pantalla es solo de consulta. Para cargar stock o cambiar precios, use “Editar semillas” o “Editar insumos” (no se muestran en modo consulta), o vaya a “Catálogos”. Si no se pueden cargar los datos, el sistema muestra el error, los indicadores quedan en “—” y puede usar “Reintentar”.",
+"texto": "Sin consumo | Tiene stock, pero todavía no se usó, así que no se puede estimar para cuánto alcanza.\nEsta pantalla es solo de consulta. Para cargar stock o cambiar precios, use “Editar semillas” o “Editar insumos” (no se muestran en modo consulta), o vaya a “Catálogos” (sección 10.1). Si no se pueden cargar los datos, el sistema muestra el error, los indicadores quedan en “—” con la nota “Datos no disponibles” y puede usar “Reintentar”.\nLos indicadores y las tablas consideran solo las semillas y los insumos activos. Para ver también los dados de baja, use “Filtrar” y elija “Todas” en “Semillas” o “Todos” en “Insumos”.",
 "peso": 1.3,
 "id": 40,
 "conceptos": {
 "cu:11": 1,
-"ent:semilla": 1,
-"ent:insumo": 2,
+"ent:semilla": 3,
+"ent:insumo": 4,
 "ent:usuario": 1,
 "con:stock": 3,
-"pan:catalogos": 1
+"pan:catalogos": 2,
+"pan:insumos": 1
+}
+},
+{
+"fuente": "Manual de usuario",
+"titulo": "10. Consultar stock (Insumos) > 10.1 Administrar catálogos: cargar, modificar, dar de baja y reactivar",
+"texto": "En “Catálogos” se administran las semillas, los insumos y las labores de mantenimiento. Dar de baja no elimina el registro: pasa a estado “Inactiva”, deja de estar disponible y conserva el historial. No está disponible en modo consulta.\nPara cargar o modificar:\nEn la barra de navegación, haga clic en “Catálogos” y elija “Semillas”, “Insumos” o “Labores de mantenimiento”.\nHaga clic en “Nueva semilla”, “Nuevo insumo” o “Nueva labor”. Para cambiar un registro existente, haga clic en “Modificar” en su fila.\nComplete los datos y haga clic en “Crear semilla”, “Crear insumo” o “Crear labor”, o en “Guardar cambios” si está modificando.\nPara dar de baja una semilla, un insumo o una labor:\nEn el catálogo, haga clic en “Dar de baja” en la fila que corresponda.\nEn el mensaje “¿Dar de baja …?”, haga clic en “Sí, dar de baja” (Figura 36).\nPara reactivar lo que se dio de baja:\nEn el catálogo, haga clic en “Filtrar” y elija “Inactivas” (en “Insumos”, “Inactivos”).\nHaga clic en “Reactivar” en la fila que corresponda. El registro vuelve a estar activo en el momento, sin pedir confirmación.",
+"peso": 1.3,
+"id": 41,
+"conceptos": {
+"cu:08": 1,
+"cu:11": 1,
+"ent:semilla": 5,
+"ent:insumo": 7,
+"ent:labor": 5,
+"ent:usuario": 1,
+"con:stock": 1,
+"pan:catalogos": 15,
+"pan:insumos": 2,
+"est:libre": 2
+}
+},
+{
+"fuente": "Manual de usuario",
+"titulo": "10. Consultar stock (Insumos) > 10.1 Administrar catálogos: cargar, modificar, dar de baja y reactivar",
+"texto": "Una labor dada de baja deja de ofrecerse al registrar labores.",
+"peso": 1.3,
+"id": 42,
+"conceptos": {
+"cu:11": 1,
+"ent:insumo": 1,
+"ent:labor": 2,
+"ent:usuario": 1,
+"con:stock": 1,
+"pan:catalogos": 4
 }
 },
 {
 "fuente": "Manual de usuario",
 "titulo": "11. Consultar rinde",
-"texto": "Meta: ver cuánto se invirtió, cuánto se cosechó y cuánto costó cada tonelada en las campañas cerradas, y compararlo con campañas anteriores del mismo lote.\nCuándo usarlo: después de cerrar una campaña, para evaluar sus resultados.\nAntes de empezar: debe existir al menos una campaña cerrada (sección 8). Si no hay ninguna, el sistema muestra “Todavía no hay campañas cerradas”.\nEn la barra de navegación, haga clic en “Rinde”. El sistema abre la campaña cerrada más reciente (Figura 35).\nOpcional: use los selectores de arriba para elegir “Lote”, “Campaña” y “Cultivo”.\nEn “Comparar con”, elija “Campaña anterior del mismo lote” o “Promedio del mismo lote”.\nLea los indicadores y el reparto de costos “En qué se fue la plata”.\nOpcional: revise los gráficos (Figura 36) y las tablas (Figura 37). Al hacer clic en una campaña de la tabla “Histórico de campañas”, el tablero pasa a mostrarla.",
+"texto": "Meta: ver cuánto se invirtió, cuánto se cosechó y cuánto costó cada tonelada en las campañas cerradas, y compararlo con campañas anteriores del mismo lote.\nCuándo usarlo: después de cerrar una campaña, para evaluar sus resultados.\nAntes de empezar: debe existir al menos una campaña cerrada (sección 8). Si no hay ninguna, el sistema muestra “Todavía no hay campañas cerradas”.\nEn la barra de navegación, haga clic en “Rinde”. El sistema abre la campaña cerrada más reciente (Figura 37).\nOpcional: use los selectores de arriba para elegir “Lote”, “Campaña” y “Cultivo”.\nEn “Comparar con”, elija “Campaña anterior del mismo lote” o “Promedio del mismo lote”.\nLea los indicadores y el reparto de costos “En qué se fue la plata”.\nOpcional: revise los gráficos (Figura 38) y las tablas (Figura 39). Al hacer clic en una campaña de la tabla “Histórico de campañas”, el tablero pasa a mostrarla.",
 "peso": 1.3,
-"id": 41,
+"id": 43,
 "conceptos": {
 "cu:05": 1,
 "cu:10": 1,
@@ -704,7 +741,7 @@ export const GRAFO: Grafo = {
 "titulo": "11. Consultar rinde",
 "texto": "Si ninguna campaña coincide con los filtros elegidos, el sistema avisa “No hay campañas para ese filtro”. Cambie alguno de los filtros para continuar. También puede elegir una campaña haciendo clic en su columna en los gráficos.\nCada indicador muestra su variación contra lo elegido en “Comparar con”, en verde si el resultado mejora y en rojo si empeora:\nIndicador | Qué mide | Mejor si…\nProducción | Toneladas cosechadas. | Sube\nRinde | Kilos cosechados por hectárea. | Sube\nInversión por hectárea | Total invertido dividido por la superficie. | Baja\nCosto por tonelada | Total invertido dividido por las toneladas producidas. | Baja\nMultiplicación de semilla | Cuántas veces se multiplicó lo sembrado. | Sube\nKilos por cada $1.000 | Kilos producidos por cada $1.000 invertidos. Muestra también la humedad promedio. | Sube",
 "peso": 1.3,
-"id": 42,
+"id": 44,
 "conceptos": {
 "cu:10": 2,
 "ent:semilla": 1,
@@ -722,7 +759,7 @@ export const GRAFO: Grafo = {
 "titulo": "11. Consultar rinde",
 "texto": "Cómo se calculan los costos: los insumos y percances quedan guardados con su costo del momento. La semilla y el costo base de las labores se valoran con el precio actual del catálogo, así que si cambió desde la campaña, el número puede diferir. El sistema no registra precios de venta, por lo que no calcula ingresos ni ganancias.\nCon doble cultivo, la superficie del lote se cuenta una sola vez por campaña, mientras que el rinde promedio se calcula por hectárea cultivada.",
 "peso": 1.3,
-"id": 43,
+"id": 45,
 "conceptos": {
 "cu:10": 1,
 "ent:lote": 1,
@@ -743,7 +780,7 @@ export const GRAFO: Grafo = {
 "titulo": "12. Administrar usuarios",
 "texto": "Meta: dar acceso al sistema a las personas del equipo y asignarles un rol.\nCuándo usarlo: cuando alguien necesita una cuenta o perdió su contraseña.\nAntes de empezar: debe ingresar con el rol Admin. La sección “Usuarios” no aparece para los demás roles.",
 "peso": 1.3,
-"id": 44,
+"id": 46,
 "conceptos": {
 "ent:usuario": 8
 }
@@ -751,9 +788,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Manual de usuario",
 "titulo": "12. Administrar usuarios > 12.1 Crear un usuario",
-"texto": "En la barra de navegación, haga clic en “Usuarios” (Figura 38).\nComplete “Nombre completo”, “Correo electrónico” y “Contraseña inicial”.\nEn “Rol”, elija “Admin”, “Ingeniero” o “Productor” (sección 2.3).\nHaga clic en “Crear usuario”. El sistema confirma con el mensaje “El usuario … fue creado.” y lo agrega a la tabla “Usuarios”.\nComuníquele a la persona su correo y su contraseña inicial por un medio seguro.\nSi el correo ya está en uso, el sistema muestra “El email ya está registrado” y no crea la cuenta.",
+"texto": "En la barra de navegación, haga clic en “Usuarios” (Figura 40).\nComplete “Nombre completo”, “Correo electrónico” y “Contraseña inicial”.\nEn “Rol”, elija “Admin”, “Ingeniero” o “Productor” (sección 2.3).\nHaga clic en “Crear usuario”. El sistema confirma con el mensaje “El usuario … fue creado.” y lo agrega a la tabla “Usuarios”.\nComuníquele a la persona su correo y su contraseña inicial por un medio seguro.\nSi el correo ya está en uso, el sistema muestra “El email ya está registrado” y no crea la cuenta.",
 "peso": 1.3,
-"id": 45,
+"id": 47,
 "conceptos": {
 "ent:usuario": 11,
 "est:enuso": 1
@@ -762,9 +799,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Manual de usuario",
 "titulo": "12. Administrar usuarios > 12.2 Reiniciar una contraseña",
-"texto": "En la tabla “Usuarios”, haga clic en “Reiniciar contraseña” en la fila de la persona.\nIngrese la “Nueva contraseña” y repítala en “Confirmar contraseña” (Figura 39).\nHaga clic en “Reiniciar contraseña”. El sistema confirma con el mensaje “Se restableció la contraseña de …”.\nComuníquele a la persona la nueva contraseña por un medio seguro.\nDesde esta pantalla no se pueden modificar ni eliminar cuentas existentes.",
+"texto": "En la tabla “Usuarios”, haga clic en “Reiniciar contraseña” en la fila de la persona.\nIngrese la “Nueva contraseña” y repítala en “Confirmar contraseña” (Figura 41).\nHaga clic en “Reiniciar contraseña”. El sistema confirma con el mensaje “Se restableció la contraseña de …”.\nComuníquele a la persona la nueva contraseña por un medio seguro.\nDesde esta pantalla no se pueden modificar ni eliminar cuentas existentes.",
 "peso": 1.3,
-"id": 46,
+"id": 48,
 "conceptos": {
 "ent:usuario": 10
 }
@@ -774,7 +811,7 @@ export const GRAFO: Grafo = {
 "titulo": "13. Consultar al asistente (Agrobot)",
 "texto": "Meta: obtener respuesta a una consulta.\nCuándo usarlo: cuando tenga una duda, desde cualquier pantalla.\nAntes de empezar: debe haber iniciado sesión. Lo pueden usar los tres roles.",
 "peso": 1.3,
-"id": 47,
+"id": 49,
 "conceptos": {
 "cu:09": 2,
 "ent:usuario": 2
@@ -783,9 +820,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Manual de usuario",
 "titulo": "13. Consultar al asistente (Agrobot) > 13.1 Abrir el chat",
-"texto": "Haga clic en el botón redondo, abajo a la derecha (Figura 40).\nEl sistema abre el panel “Agrobot”, con el robot y el campo de mensaje listo para escribir.",
+"texto": "Haga clic en el botón redondo, abajo a la derecha (Figura 42).\nEl sistema abre el panel “Agrobot”, con el robot y el campo de mensaje listo para escribir. Mientras no haya mensajes, indica sobre qué puede consultar.",
 "peso": 1.3,
-"id": 48,
+"id": 50,
 "conceptos": {
 "cu:09": 3,
 "ent:usuario": 1
@@ -794,9 +831,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Manual de usuario",
 "titulo": "13. Consultar al asistente (Agrobot) > 13.2 Enviar una consulta",
-"texto": "Escriba su consulta en “Escribí un mensaje…”. Con Shift+Enter agrega una línea.\nHaga clic en el botón de la flecha o presione Enter. Con el mensaje vacío, el botón está deshabilitado.\nEl sistema muestra su mensaje a la derecha y la respuesta del asistente a la izquierda (Figura 41).\nSi no se obtiene respuesta, el sistema lo informa en el panel. Su mensaje queda visible y puede volver a intentarlo.",
+"texto": "Escriba su consulta en “Escribí un mensaje…”. Con Shift+Enter agrega una línea. El máximo es de 500 caracteres.\nHaga clic en el botón de la flecha o presione Enter. Con el mensaje vacío, el botón está deshabilitado.\nEl sistema muestra su mensaje a la derecha, un indicador mientras el asistente escribe y luego la respuesta a la izquierda (Figura 43).\nSi no se obtiene respuesta, el sistema lo informa en el panel. Su mensaje queda visible y puede volver a intentarlo.",
 "peso": 1.3,
-"id": 49,
+"id": 51,
 "conceptos": {
 "cu:09": 3,
 "ent:usuario": 1
@@ -804,10 +841,31 @@ export const GRAFO: Grafo = {
 },
 {
 "fuente": "Manual de usuario",
-"titulo": "13. Consultar al asistente (Agrobot) > 13.3 Cerrar el chat",
-"texto": "Haga clic en la “X” del panel, en el botón redondo (en pantallas grandes) o presione Escape.\nResultado: el panel se oculta. La conversación se conserva al cambiar de pantalla, y se borra al recargar la página o cerrar sesión.\nSi en su dispositivo configuró menos movimiento, el robot queda quieto y las animaciones se reducen.",
+"titulo": "13. Consultar al asistente (Agrobot) > 13.3 Qué puede consultar",
+"texto": "Cómo usar AgroControl. Por ejemplo: “¿Cómo registro una siembra?”.\nLos datos cargados: stock y qué falta reponer, lotes, campañas, siembras, labores, cosechas, percances, rinde y costos. Por ejemplo: “¿Qué falta comprar?”.\nLo que figura en la documentación del sistema. Por ejemplo: “¿Cuándo se siembra la soja?”.\nEl asistente no responde temas ajenos a AgroControl (Figura 45) y no carga, modifica ni borra información. Si no encuentra lo consultado, lo indica. Si ingresa con el rol Productor y pregunta cómo cargar algo, le recuerda que su rol solo permite consultar.\nVerifique los datos importantes en la pantalla correspondiente antes de tomar una decisión. Puede enviar hasta 8 mensajes por minuto; si se alcanza el límite, espere un momento y vuelva a intentar.",
 "peso": 1.3,
-"id": 50,
+"id": 52,
+"conceptos": {
+"cu:09": 3,
+"cu:11": 2,
+"ent:lote": 1,
+"ent:campania": 1,
+"ent:siembra": 3,
+"ent:labor": 1,
+"ent:cosecha": 1,
+"ent:percance": 1,
+"ent:usuario": 3,
+"con:stock": 1,
+"con:rinde": 1,
+"con:costo": 1
+}
+},
+{
+"fuente": "Manual de usuario",
+"titulo": "13. Consultar al asistente (Agrobot) > 13.4 Cerrar el chat",
+"texto": "Haga clic en la “X” del panel, en el botón redondo (en pantallas grandes) o presione Escape.\nResultado: el panel se oculta. La conversación se conserva al cambiar de pantalla, y se pierde al recargar la página o cerrar sesión.\nSi en su dispositivo configuró menos movimiento, el robot queda quieto y las animaciones se reducen.",
+"peso": 1.3,
+"id": 53,
 "conceptos": {
 "cu:09": 2,
 "ent:usuario": 1
@@ -816,39 +874,37 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Manual de usuario",
 "titulo": "14. Glosario",
-"texto": "Término | Significado\nAgrobot | Nombre del asistente de AgroControl.\nAsistente | Función de chat que responde las consultas del usuario.\nBarbecho | Preparación del suelo antes de la siembra para dejarlo en condiciones óptimas.\nCampaña | Ciclo productivo de un lote dentro de un período. Se nombra por el año de inicio, por ejemplo 2026/2027. Puede estar “Abierta” o “Cerrada”.\nCosecha | Recolección del cultivo al final del ciclo. Se registra en kilos por hectárea y porcentaje de humedad.\nCosto base | Costo fijo de una labor de mantenimiento, sin contar los insumos.\nCU / CUU / CUR | Caso de uso / caso de uso de usuario / caso de uso resumen. Describen las metas que el usuario cumple con el sistema.\nDoble cultivo | Segundo cultivo realizado en un mismo lote, dentro de la misma campaña, después de cosechar el primero.\nEstación | Temporada a la que pertenece una semilla: “Verano” o “Invierno”.\nEstado del lote | Situación del lote en la campaña: “Libre” (sin cultivo), “En uso” (asignado), “Sembrado” o “Cosechado”.\nha | Hectárea, unidad de superficie de los lotes.",
+"texto": "Término | Significado\nAgrobot | Nombre del asistente de AgroControl.\nAsistente | Función de chat que responde consultas sobre AgroControl y sus datos.\nBaja | Cambio de estado a “Inactiva”: el registro deja de estar disponible, pero no se elimina.\nBarbecho | Preparación del suelo antes de la siembra para dejarlo en condiciones óptimas.\nCampaña | Ciclo productivo de un lote dentro de un período. Se nombra por el año de inicio, por ejemplo 2026/2027. Puede estar “Abierta” o “Cerrada”.\nCosecha | Recolección del cultivo al final del ciclo. Se registra en kilos por hectárea y porcentaje de humedad.\nCosto base | Costo fijo de una labor de mantenimiento, sin contar los insumos.\nCU / CUU / CUR | Caso de uso / caso de uso de usuario / caso de uso resumen. Describen las metas que el usuario cumple con el sistema.\nDoble cultivo | Segundo cultivo realizado en un mismo lote, dentro de la misma campaña, después de cosechar el primero.\nEstación | Temporada a la que pertenece una semilla: “Verano” o “Invierno”.",
 "peso": 1.3,
-"id": 51,
+"id": 54,
 "conceptos": {
 "cu:03": 1,
 "cu:09": 3,
-"ent:lote": 5,
+"ent:lote": 2,
 "ent:semilla": 1,
 "ent:insumo": 1,
-"ent:campania": 3,
+"ent:campania": 2,
 "ent:siembra": 1,
 "ent:labor": 1,
 "ent:cosecha": 2,
-"ent:usuario": 4,
+"ent:usuario": 3,
 "con:doble": 2,
 "con:barbecho": 1,
 "con:costo": 2,
 "con:humedad": 1,
-"est:libre": 1,
-"est:enuso": 1,
-"est:sembrado": 1,
-"est:cosechado": 1
+"pan:catalogos": 1,
+"est:libre": 1
 }
 },
 {
 "fuente": "Manual de usuario",
 "titulo": "14. Glosario",
-"texto": "Humedad | Porcentaje de agua del grano al momento de la cosecha.\nIndicador | Tarjeta que resume un valor de un tablero y, si corresponde, su variación.\nInsumo | Producto usado en una labor: fertilizantes, herbicidas, insecticidas, etc.\nkg/ha | Kilos cosechados por hectárea.\nLabor de mantenimiento | Tarea realizada sobre un lote sembrado hasta la cosecha, como una fertilización o una aplicación de herbicida o insecticida.\nLote | Unidad productiva mínima del campo, medida en hectáreas.\nModo consulta | Forma de uso del rol Productor: permite ver la información, pero no cargarla ni modificarla.\nPercance | Problema ocurrido en un cultivo (por ejemplo, una máquina rota durante la siembra), registrado con su fecha y costo.\nPercance general | Percance que afecta a varios lotes sembrados, como un granizo. Su costo se reparte entre ellos.\nRinde | Kilos cosechados por hectárea. En la sección “Rinde”, se muestra junto con los costos de las campañas cerradas.\nRinde total | Producción total de un lote: kilos por hectárea multiplicados por la superficie.",
+"texto": "Estado del lote | Situación del lote en la campaña: “Libre” (sin cultivo), “En uso” (asignado), “Sembrado” o “Cosechado”.\nha | Hectárea, unidad de superficie de los lotes.\nHumedad | Porcentaje de agua del grano al momento de la cosecha.\nIndicador | Tarjeta que resume un valor de un tablero y, si corresponde, su variación.\nInsumo | Producto usado en una labor: fertilizantes, herbicidas, insecticidas, etc.\nkg/ha | Kilos cosechados por hectárea.\nLabor de mantenimiento | Tarea realizada sobre un lote sembrado hasta la cosecha, como una fertilización o una aplicación de herbicida o insecticida.\nLote | Unidad productiva mínima del campo, medida en hectáreas.\nModo consulta | Forma de uso del rol Productor: permite ver la información, pero no cargarla ni modificarla.\nPercance | Problema ocurrido en un cultivo (por ejemplo, una máquina rota durante la siembra), registrado con su fecha y costo.\nPercance general | Percance que afecta a varios lotes sembrados, como un granizo. Su costo se reparte entre ellos.",
 "peso": 1.3,
-"id": 52,
+"id": 55,
 "conceptos": {
 "cu:03": 1,
-"ent:lote": 4,
+"ent:lote": 6,
 "ent:insumo": 3,
 "ent:campania": 1,
 "ent:siembra": 1,
@@ -856,31 +912,34 @@ export const GRAFO: Grafo = {
 "ent:cosecha": 2,
 "ent:percance": 4,
 "ent:usuario": 2,
-"con:rinde": 3,
-"con:costo": 3,
+"con:costo": 2,
 "con:humedad": 1,
-"pan:rinde": 1,
-"est:sembrado": 1
+"est:libre": 1,
+"est:enuso": 1,
+"est:sembrado": 2,
+"est:cosechado": 1
 }
 },
 {
 "fuente": "Manual de usuario",
 "titulo": "14. Glosario",
-"texto": "Rol | Perfil de una cuenta que define qué puede hacer en el sistema: “Admin”, “Ingeniero” o “Productor”.\nSiembra | Implantación de la semilla en el lote. Se registra en toneladas sembradas.\nStock | Cantidad disponible de una semilla o insumo. Se descuenta al registrar siembras y labores.\nStock bajo | Aviso que indica que, según el consumo promedio, el stock alcanza para menos de 2 siembras o labores.\nt | Tonelada, unidad del stock de semillas.\nTablero | Pantalla que reúne indicadores, gráficos y tablas: “Insumos” y “Rinde”.",
+"texto": "Rinde | Kilos cosechados por hectárea. En la sección “Rinde”, se muestra junto con los costos de las campañas cerradas.\nRinde total | Producción total de un lote: kilos por hectárea multiplicados por la superficie.\nRol | Perfil de una cuenta que define qué puede hacer en el sistema: “Admin”, “Ingeniero” o “Productor”.\nSiembra | Implantación de la semilla en el lote. Se registra en toneladas sembradas.\nStock | Cantidad disponible de una semilla o insumo. Se descuenta al registrar siembras y labores.\nStock bajo | Aviso que indica que, según el consumo promedio, el stock alcanza para menos de 2 siembras o labores.\nt | Tonelada, unidad del stock de semillas.\nTablero | Pantalla que reúne indicadores, gráficos y tablas: “Insumos” y “Rinde”.",
 "peso": 1.3,
-"id": 53,
+"id": 56,
 "conceptos": {
 "cu:11": 1,
-"ent:lote": 1,
+"ent:lote": 2,
 "ent:semilla": 3,
 "ent:insumo": 2,
+"ent:campania": 1,
 "ent:siembra": 3,
 "ent:labor": 2,
 "ent:usuario": 3,
 "con:stock": 4,
-"con:rinde": 1,
+"con:rinde": 4,
+"con:costo": 1,
 "pan:insumos": 1,
-"pan:rinde": 1,
+"pan:rinde": 2,
 "est:libre": 1
 }
 },
@@ -889,7 +948,7 @@ export const GRAFO: Grafo = {
 "titulo": "Meta",
 "texto": "Obtener registro de las labores y sus costos durante una campaña de un lote en específico para generar el margen bruto del mismo.",
 "peso": 1.0,
-"id": 54,
+"id": 57,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 1,
@@ -902,7 +961,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Primario: Ingeniero Agropecuario.\nOtros: Productor.",
 "peso": 1.0,
-"id": 55,
+"id": 58,
 "conceptos": {}
 },
 {
@@ -910,7 +969,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones (De sistema)",
 "texto": "Los Lotes están cargados en el sistema junto con la superficie por hectárea de cada lote.\nLos insumos y sus tipos están cargados en el sistema.\nEl stock de los insumos está cargado en el sistema.\nLas labores disponibles están cargadas en el sistema de forma predeterminada.",
 "peso": 1.0,
-"id": 56,
+"id": 59,
 "conceptos": {
 "ent:lote": 2,
 "ent:insumo": 2,
@@ -923,7 +982,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones (De Negocio)",
 "texto": "Existen fechas optimas de siembra.\nExisten condiciones climáticas favorables para el inicio de la siembra.\nDisponibilidad de maquinaria y semilla para la siembra.\nEl barbecho esta realizado y la tierra se encuentran en condiciones de siembra.",
 "peso": 1.0,
-"id": 57,
+"id": 60,
 "conceptos": {
 "ent:semilla": 1,
 "ent:siembra": 4,
@@ -935,7 +994,7 @@ export const GRAFO: Grafo = {
 "titulo": "Disparador",
 "texto": "Llega la época de siembra y el ingeniero agrónomo decide planificar la campaña del lote.",
 "peso": 1.0,
-"id": 58,
+"id": 61,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 1,
@@ -947,7 +1006,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Basico",
 "texto": "El ingeniero agrónomo define el lote y semilla y notifica al productor invocando < CUU1 – “Asignar Lote”>.\nEl productor realiza la siembra y notifica al ingeniero, el mismo indica los datos de la labor invocando < CUU2 – “Registrar Siembra”>.\n[REPETIR HASTA LA FECHA DE COSECHA] El productor realiza la labor de mantenimiento y la notifica al ingeniero agrónomo. El mismo registra la labor de mantenimiento invocando <CUU3 – “Registrar labor de mantenimiento”>.\nEl productor, llegada la fecha de cosecha, notifica al ingeniero cantidades cosechadas por hectárea del lote, el mismo indica los datos de la cosecha invocando < CUU4 – “Registrar Cosecha”>.\nEl ingeniero agrónomo indica cierre del lote invocando < CUU5 – “Cerrar Campaña”>.",
 "peso": 1.0,
-"id": 59,
+"id": 62,
 "conceptos": {
 "cu:01": 2,
 "cu:02": 2,
@@ -967,7 +1026,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Alternativo",
 "texto": "4.a<previo> Se pierde la cosecha por accidente:\n4.a.1 El productor notifica la pérdida del cultivo. El ingeniero agrónomo indica cierre de lote invocando <CUU5 – “Cerrar Campaña”>.\n5.a<previo> El productor decide realizar doble cultivo:\n5.a.1 – El productor realiza el barbecho intermedio y lo notifica al Ingeniero Agrónomo. El mismo carga dicha labor invocando <CUU3 – Registrar Labor de Mantenimiento>.\n5.a.2 – Se repiten los pasos 1 al 4 invocando.\n5.a.3 - El ingeniero agrónomo indica el cierre del lote invocando < CUU5 – “Cerrar Campaña” >.",
 "peso": 1.0,
-"id": 60,
+"id": 63,
 "conceptos": {
 "cu:03": 3,
 "cu:05": 4,
@@ -984,7 +1043,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones (De Sistema)",
 "texto": "Éxito: La campaña ingresada está registrada. El stock de los insumos esta actualizado. El margen bruto del lote esta registrado.\nFracaso: La campaña ingresada está registrada con rinde 0, el registro de labores e insumos utilizados hasta el cierre esta conservado.\nÉxito Alternativo: La campaña ingresada está registrada con doble cultivo, el margen bruto de cada cultivo individual esta registrado.",
 "peso": 1.0,
-"id": 61,
+"id": 64,
 "conceptos": {
 "ent:lote": 1,
 "ent:insumo": 2,
@@ -1000,7 +1059,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones (De Negocio)",
 "texto": "Éxito: El productor obtiene el margen bruto de la campaña para así evaluar futuras decisiones.\nFracaso: Se Pierde el cultivo del lote, causando pérdidas económicas significativas.\nÉxito Alternativo: El productor obtiene el margen bruto de cada cultivo individual y de la campaña completa.",
 "peso": 1.0,
-"id": 62,
+"id": 65,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 2
@@ -1011,7 +1070,7 @@ export const GRAFO: Grafo = {
 "titulo": "Meta",
 "texto": "Asignar un lote y su semilla correspondiente para dar inicio a la campaña.",
 "peso": 1.0,
-"id": 63,
+"id": 66,
 "conceptos": {
 "cu:01": 2,
 "ent:lote": 2,
@@ -1024,7 +1083,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Principal: Ingeniero Agrónomo",
 "peso": 1.0,
-"id": 64,
+"id": 67,
 "conceptos": {
 "cu:01": 1,
 "ent:lote": 1
@@ -1035,7 +1094,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de sistema",
 "texto": "•\nLos Lotes están cargados en el sistema junto con la superficie por hectárea de\ncada lote.\n•\nLas semillas disponibles están cargadas en el sistema.\n•\nEl stock de cada semilla está cargado en el sistema.",
 "peso": 1.0,
-"id": 65,
+"id": 68,
 "conceptos": {
 "cu:01": 1,
 "ent:lote": 3,
@@ -1048,7 +1107,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de negocio",
 "texto": "• La tierra se encuentra en condiciones de siembra.\n• Las condiciones climáticas son ideales para la siembra.",
 "peso": 1.0,
-"id": 66,
+"id": 69,
 "conceptos": {
 "cu:01": 1,
 "ent:lote": 1,
@@ -1060,7 +1119,7 @@ export const GRAFO: Grafo = {
 "titulo": "Evento Disparador",
 "texto": "El ingeniero agrónomo decide comenzar una nueva campaña y necesita definir\nel lote a utilizar.",
 "peso": 1.0,
-"id": 67,
+"id": 70,
 "conceptos": {
 "cu:01": 1,
 "ent:lote": 2,
@@ -1072,7 +1131,7 @@ export const GRAFO: Grafo = {
 "titulo": "Flujo de sucesos",
 "texto": "1. El ingeniero agrónomo solicita ver los lotes disponibles para la siembra.\nEl sistema los busca y muestra todos los lotes que no estén ocupados con\nun cultivo actualmente.\n2. El ingeniero agrónomo selecciona el lote a utilizar. El sistema valida la\nselección y busca las semillas con stock disponible para ese lote y, si\nexisten, las muestra para su selección.\n3. El ingeniero agrónomo selecciona la semilla a cultivar y confirma la\nasignación. El sistema registra la nueva campaña, asocia la semilla\nseleccionada al lote, cambia el estado del lote a “En uso” y actualiza los\nlotes libres, notificando el éxito de la operación al ingeniero agrónomo.",
 "peso": 1.0,
-"id": 68,
+"id": 71,
 "conceptos": {
 "cu:01": 1,
 "ent:lote": 8,
@@ -1089,7 +1148,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Alternativo",
 "texto": "1.a<Durante> No hay lotes disponibles para la siembra:\n1.a.1 – El sistema informa que no hay lotes libres para asignar.\n1.a.2 – El sistema finaliza el caso de uso.\n2.a<Durante> No hay stock de semillas disponibles:\n2.a.1 – El sistema informa que no hay semillas con stock disponible para\nrealizar la siembra del lote seleccionado.\n2.a.2 – El sistema no realiza ninguna asignación y finaliza el caso de uso.\n3.a<Previo > El ingeniero Agrónomo cancela la asignación al lote:\n3.a.1 – Finaliza el caso de uso sin registrar la información.",
 "peso": 1.0,
-"id": 69,
+"id": 72,
 "conceptos": {
 "cu:01": 1,
 "ent:lote": 5,
@@ -1104,7 +1163,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de sistema",
 "texto": "Éxito: El sistema registra la nueva campaña, vinculando el lote con su semilla, y\ncambia el estado del lote a “En uso”.\nFracaso: <El sistema permanece en el estado anterior>\nÉxito Alternativo: <No hay>:",
 "peso": 1.0,
-"id": 70,
+"id": 73,
 "conceptos": {
 "cu:01": 1,
 "ent:lote": 3,
@@ -1118,7 +1177,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de negocio",
 "texto": "Éxito: Queda definida la campaña, con el lote y la semilla a cultivar.\nFracaso: No queda definido el lote ni la semilla, no pudiendo iniciar con la\nsiembra.\nÉxito Alternativo: <No hay>:",
 "peso": 1.0,
-"id": 71,
+"id": 74,
 "conceptos": {
 "cu:01": 1,
 "ent:lote": 3,
@@ -1132,7 +1191,7 @@ export const GRAFO: Grafo = {
 "titulo": "Meta",
 "texto": "Obtener el registro final de los datos de una siembra en un lote determinado.",
 "peso": 1.0,
-"id": 72,
+"id": 75,
 "conceptos": {
 "cu:02": 1,
 "ent:lote": 1,
@@ -1144,7 +1203,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Principal: Ingeniero Agrónomo",
 "peso": 1.0,
-"id": 73,
+"id": 76,
 "conceptos": {
 "cu:02": 1,
 "ent:siembra": 1
@@ -1155,7 +1214,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de sistema",
 "texto": "• La semilla seleccionada está cargada en el sistema.\n• El stock de cada tipo de insumo está cargado en el sistema.\n• Hay lotes con el estado “en uso” cargados en el sistema.",
 "peso": 1.0,
-"id": 74,
+"id": 77,
 "conceptos": {
 "cu:02": 1,
 "ent:lote": 1,
@@ -1171,7 +1230,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de negocio",
 "texto": "• Finalizó la etapa de siembra en el lote.",
 "peso": 1.0,
-"id": 75,
+"id": 78,
 "conceptos": {
 "cu:02": 1,
 "ent:lote": 1,
@@ -1183,7 +1242,7 @@ export const GRAFO: Grafo = {
 "titulo": "Evento Disparador",
 "texto": "El productor notifica al ingeniero sobre la realización de la siembra.",
 "peso": 1.0,
-"id": 76,
+"id": 79,
 "conceptos": {
 "cu:02": 1,
 "ent:siembra": 2
@@ -1194,7 +1253,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Basico",
 "texto": "1. El ingeniero agrónomo solicita registrar una siembra. El sistema busca y\nmuestra los lotes que se encuentran en estado “En uso”. El ingeniero agrónomo\nselecciona el lote correspondiente.\n2. El ingeniero agrónomo ingresa la cantidad de semillas utilizadas (en Tn). El\nsistema calcula el consumo y muestra al ingeniero agrónomo el stock actual junto\ncon los datos ingresados.\n3. El ingeniero agrónomo confirma la operación. El sistema registra\ndefinitivamente la siembra, cambia el estado del lote a “Sembrado”, descuenta\nlos insumos consumidos del inventario real y notifica el éxito de la operación.",
 "peso": 1.0,
-"id": 77,
+"id": 80,
 "conceptos": {
 "cu:02": 2,
 "ent:lote": 3,
@@ -1211,7 +1270,7 @@ export const GRAFO: Grafo = {
 "titulo": "Alternativo",
 "texto": "2.a <Previo> El ingeniero agrónomo desea ajustar el stock de los insumos:\n2.a.1 – El sistema informa el stock actual disponible. El ingeniero\nagrónomo ingresa la cantidad adicional correspondiente, el sistema lo\nregistra.\n2.b <Previo> Ocurrió un percance durante el proceso de siembra en el lote:\n2.b.1 – El ingeniero agrónomo ingresa el detalle del problema (o los\nproblemas) y el costo asociado a cada uno. El sistema retiene\ntemporalmente estos datos para adjuntarlos al registro final de la labor.\n3.a<Previo> El ingeniero agrónomo desea modificar los datos ingresados:\n3.a.1 – El sistema habilita la edición de la información. 3.a.2 – El ingeniero\nagrónomo realiza las modificaciones correspondientes. El sistema registra\nlas modificaciones.\n3.b <Durante> El ingeniero cancela la registración:\n3.b.1 – El sistema descarta los datos temporales ingresados y finaliza el\ncaso de uso sin realizar modificaciones.",
 "peso": 1.0,
-"id": 78,
+"id": 81,
 "conceptos": {
 "cu:02": 1,
 "ent:lote": 1,
@@ -1229,7 +1288,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de sistema",
 "texto": "Éxito: El sistema registra el detalle de la siembra exitosa, y cambia el estado del\nlote a “Sembrado”.\nFracaso: El sistema no realiza ninguna registración de siembra y permanece en\nel estado anterior.\nÉxito Alternativo: El sistema registra el detalle de la siembra con percances, y\ncambia el estado del lote a “Sembrado”.",
 "peso": 1.0,
-"id": 79,
+"id": 82,
 "conceptos": {
 "cu:02": 1,
 "ent:lote": 2,
@@ -1243,7 +1302,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de negocio",
 "texto": "Éxito: Queda finalizada la siembra y comienza la etapa del mantenimiento del\ncultivo.\nFracaso: <No hay>\nÉxito Alternativo: <No hay>",
 "peso": 1.0,
-"id": 80,
+"id": 83,
 "conceptos": {
 "cu:02": 1,
 "ent:siembra": 2
@@ -1252,9 +1311,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-03 Registrar Labor",
 "titulo": "Meta",
-"texto": "Registrar una labor de mantenimiento realizada sobre un lote activo durante una\ncampaña en curso.",
+"texto": "Registrar una labor de mantenimiento realizada sobre un lote activo durante una campaña en curso.",
 "peso": 1.0,
-"id": 81,
+"id": 84,
 "conceptos": {
 "cu:03": 3,
 "ent:lote": 1,
@@ -1267,7 +1326,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Principal: Ingeniero Agrónomo.\nOtros: Productor",
 "peso": 1.0,
-"id": 82,
+"id": 85,
 "conceptos": {
 "cu:03": 1,
 "ent:labor": 1
@@ -1276,9 +1335,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-03 Registrar Labor",
 "titulo": "Precondiciones de sistema",
-"texto": "● Existen Lotes registrados con estado sembrado.\n● Existen Campañas registradas con estado Abierto.\n● Existen Tipos de Labor registrados.\n● Existen Productos registrados",
+"texto": "• Existen Lotes registrados con estado sembrado.\n• Existen Campañas registradas con estado Abierto.\n• Existen Tipos de Labor registrados con estado Activa.\n• Existen Productos registrados",
 "peso": 1.0,
-"id": 83,
+"id": 86,
 "conceptos": {
 "cu:03": 1,
 "ent:lote": 1,
@@ -1290,9 +1349,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-03 Registrar Labor",
 "titulo": "Precondiciones de negocio",
-"texto": "● El lote tiene un cultivo activo en el campo.\n● La campaña asociada al lote se encuentra en curso.",
+"texto": "• El lote tiene un cultivo activo en el campo.\n• La campaña asociada al lote se encuentra en curso.",
 "peso": 1.0,
-"id": 84,
+"id": 87,
 "conceptos": {
 "cu:03": 1,
 "ent:lote": 2,
@@ -1303,9 +1362,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-03 Registrar Labor",
 "titulo": "Disparador",
-"texto": "El Ingeniero Agrónomo decide registrar una labor de mantenimiento realizada\nsobre un lote activo.",
+"texto": "El Ingeniero Agrónomo decide registrar una labor de mantenimiento realizada sobre un lote activo.",
 "peso": 1.0,
-"id": 85,
+"id": 88,
 "conceptos": {
 "cu:03": 3,
 "ent:lote": 1,
@@ -1315,9 +1374,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-03 Registrar Labor",
 "titulo": "Camino Básico",
-"texto": "1. El ingeniero agrónomo solicita ver los lotes sembrados para registrar la\nlabor de mantenimiento. El sistema busca y muestra los lotes con\ncampañas activas y sembrados.\n2. El ingeniero agrónomo selecciona el lote sembrado. El sistema valida la\nselección y muestra los datos de la campaña y el listado de tipos de labor\ndisponibles.\n3. El Ingeniero Agropecuario selecciona el tipo de labor realizada, el sistema\nregistra la labor y muestra el listado de productos disponibles.\n4. El ingeniero agrónomo selecciona el insumo y la cantidad utilizada. El\nsistema valida la disponibilidad de stock en memoria y retiene los datos\ningresados.\n5. El ingeniero agrónomo confirma el registro de la labor. El sistema registra\ndefinitivamente la labor de mantenimiento, asocia los costos a la\ncampaña, descuenta la cantidad del stock del insumo y notifica el éxito de\nla operación.",
+"texto": "1. El ingeniero agrónomo solicita ver los lotes sembrados para registrar la labor de mantenimiento. El sistema busca y muestra los lotes con campañas activas y sembrados.\n2. El ingeniero agrónomo selecciona el lote sembrado. El sistema valida la selección y muestra los datos de la campaña y el listado de tipos de labor activos.\n3. El Ingeniero Agropecuario selecciona el tipo de labor realizada, el sistema registra la labor y muestra el listado de productos disponibles.\n4. El ingeniero agrónomo selecciona el insumo y la cantidad utilizada. El sistema valida la disponibilidad de stock en memoria y retiene los datos ingresados.\n5. El ingeniero agrónomo confirma el registro de la labor. El sistema registra definitivamente la labor de mantenimiento, asocia los costos a la campaña, descuenta la cantidad del stock del insumo y notifica el éxito de la operación.",
 "peso": 1.0,
-"id": 86,
+"id": 89,
 "conceptos": {
 "cu:03": 3,
 "ent:lote": 3,
@@ -1332,25 +1391,26 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-03 Registrar Labor",
 "titulo": "Camino Alternativo",
-"texto": "1.a < Durante > No existen lotes con campañas activas:\n1.a.1 – El sistema informa que no hay lotes con campañas activas en\nestado \"Sembrado\".\n1.a.2 – El sistema finaliza el caso de uso.\n4.a < Previo > El insumo no tiene stock suficiente:\n4.a.1 – El sistema advierte que el stock actual es insuficiente para cubrir\nla cantidad declarada.\n4.a.2 – El sistema finaliza el caso de uso.\n5.a < Previo > El ingeniero agrónomo cancela la operación:\n5.a.1 – El ingeniero agrónomo decide cancelar el registro.\n5.a.2 – El sistema descarta los datos temporales ingresados y finaliza el\ncaso de uso sin realizar modificaciones.",
+"texto": "1.a < Durante > No existen lotes con campañas activas:\n1.a.1 – El sistema informa que no hay lotes con campañas activas en estado \"Sembrado\".\n1.a.2 – El sistema finaliza el caso de uso.\n4.a < Previo > El insumo no tiene stock suficiente:\n4.a.1 – El sistema advierte que el stock actual es insuficiente para cubrir la cantidad declarada.\n4.a.2 – El sistema finaliza el caso de uso.\n5.a < Previo > El ingeniero agrónomo cancela la operación:\n5.a.1 – El ingeniero agrónomo decide cancelar el registro.\n5.a.2 – El sistema descarta los datos temporales ingresados y finaliza el caso de uso sin realizar modificaciones.\n5.b < Durante > La labor fue dada de baja:\n5.b.1 – El sistema informa que la labor está inactiva y no registra la información.",
 "peso": 1.0,
-"id": 87,
+"id": 90,
 "conceptos": {
 "cu:03": 1,
 "ent:lote": 2,
 "ent:insumo": 1,
 "ent:campania": 2,
-"ent:labor": 1,
+"ent:labor": 3,
 "con:stock": 2,
+"pan:catalogos": 1,
 "est:sembrado": 1
 }
 },
 {
 "fuente": "Caso de uso CU-03 Registrar Labor",
 "titulo": "Postcondiciones de sistema",
-"texto": "Éxito: La Labor de Mantenimiento ingresada está registrada y asociada al Lote\ny la Siembra activa.\nFracaso: <El sistema permanece en el estado anterior>\nÉxito Alternativo: <No hay>",
+"texto": "Éxito: La Labor de Mantenimiento ingresada está registrada y asociada al Lote y la Siembra activa.\nFracaso: <El sistema permanece en el estado anterior>\nÉxito Alternativo: <No hay>",
 "peso": 1.0,
-"id": 88,
+"id": 91,
 "conceptos": {
 "cu:03": 2,
 "ent:lote": 1,
@@ -1363,7 +1423,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de negocio",
 "texto": "Éxito: La labor de mantenimiento del cultivo ha sido registrada.\nFracaso: La labor de mantenimiento del cultivo no ha sido registrada.\nÉxito Alternativo: <No hay>",
 "peso": 1.0,
-"id": 89,
+"id": 92,
 "conceptos": {
 "cu:03": 3,
 "ent:labor": 3
@@ -1374,7 +1434,7 @@ export const GRAFO: Grafo = {
 "titulo": "Meta",
 "texto": "Registrar la cantidad cosechada por hectárea de un lote en una campaña\ndeterminada.",
 "peso": 1.0,
-"id": 90,
+"id": 93,
 "conceptos": {
 "cu:04": 1,
 "ent:lote": 1,
@@ -1387,7 +1447,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Principal: Ingeniero Agrónomo",
 "peso": 1.0,
-"id": 91,
+"id": 94,
 "conceptos": {
 "cu:04": 1,
 "ent:cosecha": 1
@@ -1398,7 +1458,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de sistema",
 "texto": "● Los lotes están cargados en el sistema junto con la superficie por hectárea\nde cada lote.\n● Las campañas activas están registradas en el sistema.\n● Las labores realizadas durante la campaña están registradas en el\nsistema.\n● El lote posee un cultivo asignado en un lote dentro de la campaña.",
 "peso": 1.0,
-"id": 92,
+"id": 95,
 "conceptos": {
 "cu:04": 1,
 "ent:lote": 4,
@@ -1412,7 +1472,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de negocio",
 "texto": "● La tierra se encuentra en condiciones de cosecha.\n● Las condiciones climáticas son ideales para la cosecha.",
 "peso": 1.0,
-"id": 93,
+"id": 96,
 "conceptos": {
 "cu:04": 1,
 "ent:cosecha": 3
@@ -1423,7 +1483,7 @@ export const GRAFO: Grafo = {
 "titulo": "Evento Disparador",
 "texto": "El productor informa al ingeniero agrónomo que la cosecha del lote fue realizada\ny deben registrarse los datos obtenidos.",
 "peso": 1.0,
-"id": 94,
+"id": 97,
 "conceptos": {
 "cu:04": 1,
 "ent:lote": 1,
@@ -1435,7 +1495,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Básico",
 "texto": "1. El ingeniero agrónomo solicita ver los lotes en condiciones de cosecha. El\nsistema busca y muestra los lotes con campañas activas y listos para\ncosechar.\n2. El ingeniero agrónomo selecciona el lote cosechado. El sistema muestra\nlos datos de la campaña y del cultivo correspondientes.\n3. El ingeniero agrónomo ingresa la cantidad cosechada por hectárea y la\nhumedad obtenida del cultivo, confirmando el registro de la cosecha.El\nsistema registra los datos de la cosecha en la campaña correspondiente.",
 "peso": 1.0,
-"id": 95,
+"id": 98,
 "conceptos": {
 "cu:04": 1,
 "ent:lote": 3,
@@ -1450,7 +1510,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Alternativo",
 "texto": "1.a<Durante> No hay lotes disponibles para cosecha:\n1.a.1 – El sistema informa que no existen lotes con cultivos en condiciones\nde cosecha.\n1.a.2 – El sistema finaliza el caso de uso.\n2.a<Durante> El lote no posee una campaña activa:\n2.a.1 – El sistema informa que no es posible registrar la cosecha para ese\nlote.\n2.a.2 – El sistema finaliza el caso de uso.\n3.a<Previo> El ingeniero agrónomo cancela el registro de la cosecha:\n3.a.1 – El sistema descarta los datos ingresados y finaliza el caso de uso.",
 "peso": 1.0,
-"id": 96,
+"id": 99,
 "conceptos": {
 "cu:04": 1,
 "ent:lote": 4,
@@ -1463,7 +1523,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de sistema",
 "texto": "Éxito: El sistema registra la cosecha del lote en la campaña correspondiente y\nactualiza el rendimiento obtenido por hectárea.\nFracaso: El sistema no registra los datos de la cosecha del lote.\nÉxito Alternativo: <No hay>:",
 "peso": 1.0,
-"id": 97,
+"id": 100,
 "conceptos": {
 "cu:04": 1,
 "ent:lote": 2,
@@ -1477,7 +1537,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de negocio",
 "texto": "Éxito: Queda registrada la cantidad cosechada del cultivo del lote en la campaña\ncorrespondiente.\nFracaso: No queda registrada la cosecha del cultivo del lote.\nÉxito Alternativo: <No hay>:",
 "peso": 1.0,
-"id": 98,
+"id": 101,
 "conceptos": {
 "cu:04": 1,
 "ent:lote": 2,
@@ -1490,7 +1550,7 @@ export const GRAFO: Grafo = {
 "titulo": "Meta",
 "texto": "Cerrar una campaña agrícola activa una vez finalizado el ciclo productivo, registrando el\ncierre de todos los lotes asociados.",
 "peso": 1.0,
-"id": 99,
+"id": 102,
 "conceptos": {
 "cu:05": 1,
 "ent:lote": 1,
@@ -1502,7 +1562,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Principal: Ingeniero Agrónomo\nOtros: Productor",
 "peso": 1.0,
-"id": 100,
+"id": 103,
 "conceptos": {}
 },
 {
@@ -1510,7 +1570,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de sistema",
 "texto": "• Existe al menos una Campaña registrada con estado Abierto.\n•\nExisten Lotes asociados a la campaña con estado Cosechado.",
 "peso": 1.0,
-"id": 101,
+"id": 104,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 2,
@@ -1522,7 +1582,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de negocio",
 "texto": "El ciclo productivo de la campaña ha concluido.\nTodos los lotes activos de la campaña han sido procesados (labores finalizadas).",
 "peso": 1.0,
-"id": 102,
+"id": 105,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 2,
@@ -1534,7 +1594,7 @@ export const GRAFO: Grafo = {
 "titulo": "Disparador",
 "texto": "El Ingeniero Agrónomo decide cerrar una campaña activa una vez finalizado el ciclo\nproductivo.",
 "peso": 1.0,
-"id": 103,
+"id": 106,
 "conceptos": {
 "cu:05": 1,
 "ent:campania": 1
@@ -1545,7 +1605,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Básico",
 "texto": "1. El Ingeniero Agrónomo solicita ver las campañas activas. El sistema busca y muestra\nlas campañas con estado Abierto.\n2. El Ingeniero Agrónomo selecciona la campaña a cerrar. El sistema muestra los datos\ngenerales de la campaña y el estado de su lote asociado.\n3. El Ingeniero Agrónomo confirma el cierre. El sistema valida que el lote se encuentre\nen estado \"Cosechado\".\n4. El sistema actualiza el estado de la campaña a \"Cerrada\", cambia el estado de los\nlotes asociados a \"Libre\", y muestra un mensaje de confirmación de éxito de la\noperación.",
 "peso": 1.0,
-"id": 104,
+"id": 107,
 "conceptos": {
 "ent:lote": 3,
 "ent:campania": 5,
@@ -1558,7 +1618,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Alternativo",
 "texto": "4a<Durante>. El Ingeniero Agrónomo cancela el cierre de campaña\n4.a.1 – El Ingeniero Agrónomo decide cancelar el cierre de la campaña.\n4.a.2 – El sistema deja la campaña con estado “Abierto” y finaliza el caso de uso.",
 "peso": 1.0,
-"id": 105,
+"id": 108,
 "conceptos": {
 "cu:05": 1,
 "ent:campania": 3
@@ -1569,7 +1629,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de sistema",
 "texto": "Éxito: La Campaña ha sido cerrada y todos los Lotes asociados han sido actualizados a\nestado Libre.\nFracaso: <El sistema permanece sin cambios>\nÉxito Alternativo: <vacío>",
 "peso": 1.0,
-"id": 106,
+"id": 109,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 1,
@@ -1581,9 +1641,118 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de negocio",
 "texto": "Éxito: El ciclo productivo de la campaña ha sido registrado como finalizado.\nFracaso: La campaña no ha sido cerrada.\nÉxito Alternativo: <No hay>:",
 "peso": 1.0,
-"id": 107,
+"id": 110,
 "conceptos": {
 "ent:campania": 2
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Meta",
+"texto": "Dar de baja un insumo registrado en el sistema.",
+"peso": 1.0,
+"id": 111,
+"conceptos": {
+"cu:07": 2,
+"ent:insumo": 2,
+"pan:catalogos": 1
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Actores",
+"texto": "Principal: Ingeniero Agrónomo",
+"peso": 1.0,
+"id": 112,
+"conceptos": {
+"cu:07": 1,
+"ent:insumo": 1
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Precondiciones de sistema",
+"texto": "• Existen insumos registrados en el sistema.\n• El insumo que se desea dar de baja se encuentra registrado.",
+"peso": 1.0,
+"id": 113,
+"conceptos": {
+"cu:07": 1,
+"ent:insumo": 3,
+"pan:catalogos": 1
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Precondiciones de negocio",
+"texto": "• El insumo se encuentra disponible para ser dado de baja.",
+"peso": 1.0,
+"id": 114,
+"conceptos": {
+"cu:07": 1,
+"ent:insumo": 2,
+"pan:catalogos": 1,
+"est:libre": 1
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Evento Disparador",
+"texto": "El ingeniero agrónomo decide dar de baja un insumo registrado en el sistema.",
+"peso": 1.0,
+"id": 115,
+"conceptos": {
+"cu:07": 2,
+"ent:insumo": 2,
+"pan:catalogos": 1
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Camino Básico",
+"texto": "1. El ingeniero agrónomo solicita visualizar los insumos registrados. El sistema busca y muestra los insumos disponibles.\n2. El ingeniero agrónomo selecciona el insumo que desea dar de baja. El sistema muestra la información del insumo seleccionado y solicita la confirmación de la operación.\n3. El ingeniero agrónomo confirma la baja del insumo. El sistema registra la baja cambiando el estado del insumo a “Inactiva”.",
+"peso": 1.0,
+"id": 116,
+"conceptos": {
+"cu:07": 2,
+"ent:insumo": 7,
+"pan:catalogos": 3
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Camino Alternativo",
+"texto": "1.a <Durante> No existen insumos registrados:\n1.a.1 El sistema informa que no existen insumos registrados y finaliza el caso de uso.\n2.a <Previo> El ingeniero agrónomo desea reactivar un insumo dado de baja:\n2.a.1 El ingeniero agrónomo filtra los insumos inactivos y selecciona reactivar. El sistema cambia el estado del insumo a “Activa” y finaliza el caso de uso.\n3.a <Previo> El ingeniero agrónomo cancela la operación:\n3.a.1 El sistema cancela la operación y finaliza el caso de uso.",
+"peso": 1.0,
+"id": 117,
+"conceptos": {
+"cu:07": 1,
+"ent:insumo": 6,
+"pan:catalogos": 3
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Postcondiciones de sistema",
+"texto": "Éxito: El sistema cambia el estado del insumo a “Inactiva”.\nFracaso: El sistema no registró la baja del insumo y sigue disponible para su selección.\nÉxito Alternativo: El sistema cambia el estado del insumo a “Activa”.",
+"peso": 1.0,
+"id": 118,
+"conceptos": {
+"cu:07": 2,
+"ent:insumo": 4,
+"pan:catalogos": 1,
+"est:libre": 1
+}
+},
+{
+"fuente": "Caso de uso CU-07 Eliminar Insumo",
+"titulo": "Postcondiciones de negocio",
+"texto": "Éxito: El insumo deja de estar disponible para su utilización en el sistema.\nFracaso: El insumo continúa disponible para su utilización en el sistema.\nÉxito Alternativo: El insumo vuelve a estar disponible para su utilización en el sistema.",
+"peso": 1.0,
+"id": 119,
+"conceptos": {
+"cu:07": 1,
+"ent:insumo": 4,
+"est:libre": 3
 }
 },
 {
@@ -1591,7 +1760,7 @@ export const GRAFO: Grafo = {
 "titulo": "Meta",
 "texto": "Obtener una respuesta del asistente Agrobot a una consulta.",
 "peso": 1.0,
-"id": 108,
+"id": 120,
 "conceptos": {
 "cu:09": 3
 }
@@ -1601,7 +1770,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Principal: Ingeniero Agrónomo\nOtros: Productor, Administrador",
 "peso": 1.0,
-"id": 109,
+"id": 121,
 "conceptos": {
 "cu:09": 1
 }
@@ -1611,7 +1780,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de sistema",
 "texto": "• El usuario se encuentra logueado en el sistema.\n• El servicio del asistente está disponible.",
 "peso": 1.0,
-"id": 110,
+"id": 122,
 "conceptos": {
 "cu:09": 2,
 "ent:usuario": 1,
@@ -1624,7 +1793,7 @@ export const GRAFO: Grafo = {
 "titulo": "Evento Disparador",
 "texto": "El usuario tiene una consulta y decide realizarla al asistente.",
 "peso": 1.0,
-"id": 111,
+"id": 123,
 "conceptos": {
 "cu:09": 2,
 "ent:usuario": 1
@@ -1633,9 +1802,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-09 Consultar Asistente",
 "titulo": "Camino Básico",
-"texto": "1. El usuario abre el chat. El sistema muestra el panel del asistente con la conversación de la sesión actual, si existe.\n2. El usuario escribe su consulta y la envía. El sistema muestra el mensaje, lo transmite al asistente y muestra la respuesta recibida. [REPETIR MIENTRAS EL USUARIO TENGA CONSULTAS]\n3. El usuario cierra el chat. El sistema oculta el panel y conserva la conversación mientras no se recargue la página ni se cierre la sesión.",
+"texto": "1. El usuario abre el chat. El sistema muestra el panel del asistente con la conversación de la sesión actual, si existe.\n2. El usuario escribe su consulta y la envía. El sistema muestra el mensaje, verifica que trate sobre AgroControl, reúne la documentación y los datos necesarios, y muestra la respuesta del asistente. [REPETIR MIENTRAS EL USUARIO TENGA CONSULTAS]\n3. El usuario cierra el chat. El sistema oculta el panel y conserva la conversación mientras no se recargue la página ni se cierre la sesión.",
 "peso": 1.0,
-"id": 112,
+"id": 124,
 "conceptos": {
 "cu:09": 3,
 "ent:usuario": 4
@@ -1644,12 +1813,12 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-09 Consultar Asistente",
 "titulo": "Camino Alternativo",
-"texto": "2.a<Previo> El usuario no desea realizar la consulta:\n2.a.1 – El usuario cierra el chat. El sistema oculta el panel y finaliza el caso de uso.\n2.b<Previo> El mensaje está vacío:\n2.b.1 – El sistema no permite enviarlo.\n2.c<Durante> No se obtiene respuesta del asistente:\n2.c.1 – El sistema informa el error y conserva el mensaje en la conversación. El usuario puede enviar otro mensaje o cerrar el chat.",
+"texto": "2.a<Previo> El usuario no desea realizar la consulta:\n2.a.1 – El usuario cierra el chat. El sistema oculta el panel y finaliza el caso de uso.\n2.b<Previo> El mensaje está vacío:\n2.b.1 – El sistema no permite enviarlo.\n2.c<Durante> No se obtiene respuesta del asistente:\n2.c.1 – El sistema informa el error y conserva el mensaje en la conversación. El usuario puede enviar otro mensaje o cerrar el chat.\n2.d<Durante> La consulta no trata sobre AgroControl:\n2.d.1 – El sistema informa que solo responde sobre AgroControl y no realiza la consulta.\n2.e<Durante> El Productor consulta cómo cargar o modificar información:\n2.e.1 – El sistema antepone a la respuesta el aviso de que su rol solo permite consultar.\n2.f<Durante> La información solicitada no está registrada ni documentada:\n2.f.1 – El sistema informa que no la encuentra.\n2.g<Previo> Se supera el límite de mensajes por minuto o el cupo del servicio:\n2.g.1 – El sistema informa el límite y permite intentar más tarde.",
 "peso": 1.0,
-"id": 113,
+"id": 125,
 "conceptos": {
 "cu:09": 2,
-"ent:usuario": 3
+"ent:usuario": 4
 }
 },
 {
@@ -1657,7 +1826,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de sistema",
 "texto": "Éxito: La consulta y su respuesta quedan visibles en la conversación de la sesión actual.\nFracaso: La consulta queda visible sin respuesta y el sistema informa el error. No se modifica información del sistema.\nÉxito Alternativo: <No hay>",
 "peso": 1.0,
-"id": 114,
+"id": 126,
 "conceptos": {
 "cu:09": 1
 }
@@ -1667,7 +1836,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de negocio",
 "texto": "Éxito: El usuario obtiene respuesta a su consulta.\nFracaso: El usuario no obtiene respuesta a su consulta.\nÉxito Alternativo: <No hay>",
 "peso": 1.0,
-"id": 115,
+"id": 127,
 "conceptos": {
 "cu:09": 1,
 "ent:usuario": 2
@@ -1678,7 +1847,7 @@ export const GRAFO: Grafo = {
 "titulo": "Meta",
 "texto": "Conocer la producción, la inversión y los costos de las campañas cerradas y compararlos con los de campañas anteriores del mismo lote.",
 "peso": 1.0,
-"id": 116,
+"id": 128,
 "conceptos": {
 "cu:10": 1,
 "ent:lote": 1,
@@ -1692,7 +1861,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Principal: Ingeniero Agrónomo\nOtros: Productor, Administrador",
 "peso": 1.0,
-"id": 117,
+"id": 129,
 "conceptos": {
 "cu:10": 1,
 "con:rinde": 1
@@ -1703,7 +1872,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de sistema",
 "texto": "• El usuario se encuentra logueado en el sistema.\n• Existe al menos una campaña registrada con estado \"Cerrada\".",
 "peso": 1.0,
-"id": 118,
+"id": 130,
 "conceptos": {
 "cu:10": 1,
 "ent:campania": 1,
@@ -1717,7 +1886,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de negocio",
 "texto": "• El ciclo productivo de la campaña ha concluido.",
 "peso": 1.0,
-"id": 119,
+"id": 131,
 "conceptos": {
 "cu:10": 1,
 "ent:campania": 1,
@@ -1729,7 +1898,7 @@ export const GRAFO: Grafo = {
 "titulo": "Evento Disparador",
 "texto": "El usuario decide evaluar los resultados de una campaña.",
 "peso": 1.0,
-"id": 120,
+"id": 132,
 "conceptos": {
 "cu:10": 1,
 "ent:campania": 1,
@@ -1742,7 +1911,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Básico",
 "texto": "1. El usuario solicita ver el rinde. El sistema busca las campañas cerradas, calcula sus indicadores y muestra el tablero de la más reciente, comparado con la campaña anterior de cada lote: indicadores, reparto de costos, gráficos, histórico de campañas y lotes de la campaña.\n2. El usuario selecciona el lote, la campaña o el cultivo. El sistema filtra los datos, recalcula los indicadores y muestra el tablero actualizado.",
 "peso": 1.0,
-"id": 121,
+"id": 133,
 "conceptos": {
 "cu:10": 1,
 "ent:lote": 3,
@@ -1757,7 +1926,7 @@ export const GRAFO: Grafo = {
 "titulo": "Camino Alternativo",
 "texto": "1.a<Durante> No existen campañas cerradas:\n1.a.1 – El sistema informa que todavía no hay campañas cerradas y finaliza el caso de uso.\n1.b<Durante> No se pueden obtener los datos:\n1.b.1 – El sistema informa el error y permite reintentar.\n1.c<Posterior> La campaña no tiene otra anterior del mismo lote:\n1.c.1 – El sistema informa que no hay contra qué comparar y muestra los indicadores sin variación.\n2.a<Previo> El usuario decide comparar con el promedio:\n2.a.1 – El usuario selecciona \"Promedio del mismo lote\". El sistema recalcula las variaciones contra el promedio de las otras campañas de los mismos lotes.\n2.b<Previo> El usuario selecciona la campaña desde un gráfico o el histórico:\n2.b.1 – El sistema muestra el tablero de la campaña seleccionada.\n2.c<Durante> No hay campañas para los filtros seleccionados:\n2.c.1 – El sistema informa que no hay campañas para ese filtro y mantiene disponibles los filtros.",
 "peso": 1.0,
-"id": 122,
+"id": 134,
 "conceptos": {
 "cu:10": 1,
 "ent:lote": 3,
@@ -1771,7 +1940,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de sistema",
 "texto": "Éxito: El sistema muestra el tablero de la campaña seleccionada. No se modifica información.\nFracaso: El sistema no muestra el tablero e informa el motivo.\nÉxito Alternativo: El sistema muestra el tablero sin comparación.",
 "peso": 1.0,
-"id": 123,
+"id": 135,
 "conceptos": {
 "cu:10": 1,
 "ent:campania": 1,
@@ -1783,7 +1952,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de negocio",
 "texto": "Éxito: El usuario cuenta con información para evaluar la campaña y tomar futuras decisiones.\nFracaso: El usuario no cuenta con la información de la campaña.\nÉxito Alternativo: El usuario conoce los resultados, sin referencia de campañas anteriores.",
 "peso": 1.0,
-"id": 124,
+"id": 136,
 "conceptos": {
 "cu:10": 1,
 "ent:campania": 3,
@@ -1796,7 +1965,7 @@ export const GRAFO: Grafo = {
 "titulo": "Meta",
 "texto": "Conocer el stock de semillas e insumos, su valor y para cuántos usos más alcanza.",
 "peso": 1.0,
-"id": 125,
+"id": 137,
 "conceptos": {
 "cu:11": 1,
 "ent:semilla": 1,
@@ -1809,7 +1978,7 @@ export const GRAFO: Grafo = {
 "titulo": "Actores",
 "texto": "Principal: Ingeniero Agrónomo\nOtros: Productor, Administrador",
 "peso": 1.0,
-"id": 126,
+"id": 138,
 "conceptos": {
 "cu:11": 1,
 "con:stock": 1
@@ -1820,7 +1989,7 @@ export const GRAFO: Grafo = {
 "titulo": "Precondiciones de sistema",
 "texto": "• El usuario se encuentra logueado en el sistema.\n• Las semillas y los insumos están cargados en el sistema.",
 "peso": 1.0,
-"id": 127,
+"id": 139,
 "conceptos": {
 "cu:11": 1,
 "ent:semilla": 1,
@@ -1835,7 +2004,7 @@ export const GRAFO: Grafo = {
 "titulo": "Evento Disparador",
 "texto": "El usuario decide conocer la disponibilidad de semillas e insumos, por ejemplo antes de planificar una siembra o una labor.",
 "peso": 1.0,
-"id": 128,
+"id": 140,
 "conceptos": {
 "cu:11": 1,
 "ent:semilla": 1,
@@ -1849,9 +2018,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-11 Consultar Stock",
 "titulo": "Camino Básico",
-"texto": "1. El usuario solicita ver el stock. El sistema busca las semillas y los insumos, calcula el consumo promedio y la situación de cada uno, y muestra los indicadores, las semillas activas y los insumos, primero los más urgentes.\n2. El usuario selecciona el orden de una tabla. El sistema la muestra ordenada según lo seleccionado.",
+"texto": "1. El usuario solicita ver el stock. El sistema busca las semillas y los insumos, calcula el consumo promedio y la situación de cada uno, y muestra los indicadores, las semillas activas y los insumos activos, primero los más urgentes. Los indicadores consideran solo los activos.\n2. El usuario selecciona el orden de una tabla. El sistema la muestra ordenada según lo seleccionado.",
 "peso": 1.0,
-"id": 129,
+"id": 141,
 "conceptos": {
 "cu:11": 1,
 "ent:semilla": 2,
@@ -1863,13 +2032,13 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Caso de uso CU-11 Consultar Stock",
 "titulo": "Camino Alternativo",
-"texto": "1.a<Durante> No hay semillas activas o insumos cargados:\n1.a.1 – El sistema lo informa en la tabla correspondiente.\n1.b<Durante> No se pueden obtener los datos:\n1.b.1 – El sistema informa el error, muestra los indicadores sin dato y permite reintentar.\n2.a<Previo> El usuario desea ver también las semillas inactivas:\n2.a.1 – El usuario selecciona \"Todas\". El sistema muestra todas las semillas.\n2.b<Previo> El usuario desea editar las semillas o los insumos:\n2.b.1 – El usuario selecciona \"Editar semillas\" o \"Editar insumos\". El sistema muestra el catálogo correspondiente y finaliza el caso de uso. Esta opción no está disponible para el Productor.",
+"texto": "1.a<Durante> No hay semillas o insumos activos:\n1.a.1 – El sistema lo informa en la tabla correspondiente.\n1.b<Durante> No se pueden obtener los datos:\n1.b.1 – El sistema informa el error, muestra los indicadores sin dato y permite reintentar.\n2.a<Previo> El usuario desea ver también las semillas o los insumos inactivos:\n2.a.1 – El usuario selecciona \"Todas\" en las semillas o \"Todos\" en los insumos. El sistema los muestra.\n2.b<Previo> El usuario desea editar las semillas o los insumos:\n2.b.1 – El usuario selecciona \"Editar semillas\" o \"Editar insumos\". El sistema muestra el catálogo correspondiente y finaliza el caso de uso. Esta opción no está disponible para el Productor.",
 "peso": 1.0,
-"id": 130,
+"id": 142,
 "conceptos": {
 "cu:11": 1,
 "ent:semilla": 5,
-"ent:insumo": 3,
+"ent:insumo": 5,
 "ent:usuario": 4,
 "con:stock": 1,
 "pan:catalogos": 1,
@@ -1881,7 +2050,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de sistema",
 "texto": "Éxito: El sistema muestra el stock y la situación de cada semilla e insumo. No se modifica información.\nFracaso: El sistema no muestra el stock e informa el motivo.\nÉxito Alternativo: <No hay>",
 "peso": 1.0,
-"id": 131,
+"id": 143,
 "conceptos": {
 "cu:11": 1,
 "ent:semilla": 1,
@@ -1894,7 +2063,7 @@ export const GRAFO: Grafo = {
 "titulo": "Postcondiciones de negocio",
 "texto": "Éxito: El usuario sabe de qué dispone y qué debe reponer.\nFracaso: El usuario no conoce la disponibilidad de semillas e insumos.\nÉxito Alternativo: <No hay>",
 "peso": 1.0,
-"id": 132,
+"id": 144,
 "conceptos": {
 "cu:11": 2,
 "ent:semilla": 1,
@@ -1908,7 +2077,7 @@ export const GRAFO: Grafo = {
 "titulo": "Descripción del Documento",
 "texto": "En este documento se listarán las reglas de negocio que se infirieron de las múltiples\ncharlas con el ingeniero agrónomo y del desarrollo de los documentos.",
 "peso": 1.0,
-"id": 133,
+"id": 145,
 "conceptos": {}
 },
 {
@@ -1916,7 +2085,7 @@ export const GRAFO: Grafo = {
 "titulo": "Reglas de negocio",
 "texto": "• RN01: Un Lote no debe tener más de un cultivo activo de manera simultánea.\n• RN02: La siembra de un cultivo debe realizarse dentro de su fecha optima\npredefinida y con el barbecho previamente realizado.\n• RN02: Toda semilla debe pertenecer a una temporada predeterminada.\n• RN03: Toda semilla tiene una fecha optima de siembra.\n• RN04: El cierre de campaña debe realizarse una vez finalizada la cosecha del\ncultivo y cierre del lote.\n• RN05: Un lote puede albergar más de un cultivo en el tiempo.\n• RN06: Una campaña de doble cultivo inicia con la siembra del primer cultivo de\ninvierno y finaliza con la cosecha del segundo cultivo de verano.\n• RN07: Una campaña corresponde al ciclo productivo de un lote dentro de un\nperíodo determinado.\n• RN08: Una campaña puede contemplar uno o dos cultivos de manera secuencial\n(doble cultivo).\n• RN09: En un esquema de doble cultivo, el segundo cultivo solo puede iniciarse\nuna vez finalizada la cosecha del primero.\n• RN10: Una campaña se considera finalizada cuando se realiza la cosecha del\núltimo cultivo y se cierra el lote.",
 "peso": 1.0,
-"id": 134,
+"id": 146,
 "conceptos": {
 "cu:05": 1,
 "ent:lote": 5,
@@ -1933,7 +2102,7 @@ export const GRAFO: Grafo = {
 "titulo": "Reglas de negocio",
 "texto": "• RN11: En caso de doble cultivo, el análisis debe contemplar tanto resultados\nindividuales por cultivo como resultados consolidados del lote.",
 "peso": 1.0,
-"id": 135,
+"id": 147,
 "conceptos": {
 "ent:lote": 1,
 "con:doble": 1
@@ -1944,7 +2113,7 @@ export const GRAFO: Grafo = {
 "titulo": "Requerimientos funcionales",
 "texto": "Código | Descripción | Caso de uso\nRF-01 | El sistema debe permitir abrir y cerrar el chat del asistente desde cualquier pantalla con sesión iniciada. | CU-09\nRF-02 | El sistema debe permitir enviar mensajes no vacíos y mostrar la respuesta del asistente. | CU-09\nRF-03 | El sistema debe conservar la conversación al cambiar de pantalla, hasta recargar la página o cerrar sesión. | CU-09\nRF-04 | El sistema debe informar si no se obtiene respuesta del asistente. | CU-09\nRF-05 | El asistente debe estar disponible para los tres roles. | CU-09\nRF-06 | El sistema debe mostrar, por campaña cerrada: producción, rinde, inversión por hectárea, costo por tonelada, multiplicación de semilla y kilos por cada $1.000. | CU-10\nRF-07 | El sistema debe mostrar el reparto de costos en semilla, labores, insumos y percances. | CU-10\nRF-08 | El sistema debe graficar costo por tonelada, rinde e inversión por hectárea de hasta las últimas 12 campañas. | CU-10\nRF-09 | El sistema debe permitir filtrar el rinde por lote, campaña y cultivo, e informar si no hay coincidencias. | CU-10",
 "peso": 0.8,
-"id": 136,
+"id": 148,
 "conceptos": {
 "cu:09": 4,
 "cu:10": 2,
@@ -1963,14 +2132,15 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Requerimientos",
 "titulo": "Requerimientos funcionales",
-"texto": "RF-10 | El sistema debe comparar la campaña con la anterior o con el promedio del mismo lote. | CU-10\nRF-11 | El sistema debe mostrar el histórico de campañas y el detalle por lote. | CU-10\nRF-12 | El sistema debe mostrar el valor total en stock, las semillas activas, los insumos y los productos a reponer. | CU-11\nRF-13 | El sistema debe estimar para cuántos usos alcanza cada producto y clasificarlo en \"Sin stock\", \"Stock bajo\" (menos de 2 usos), \"Con stock\" o \"Sin consumo\". | CU-11\nRF-14 | El sistema debe permitir ordenar por urgencia, valor o nombre, y filtrar las semillas por estado. | CU-11\nRF-15 | Los tableros deben ser de solo lectura y accesibles para los tres roles. | CU-10, CU-11",
+"texto": "RF-10 | El sistema debe comparar la campaña con la anterior o con el promedio del mismo lote. | CU-10\nRF-11 | El sistema debe mostrar el histórico de campañas y el detalle por lote. | CU-10\nRF-12 | El sistema debe mostrar el valor total en stock, las semillas activas, los insumos activos y los productos activos a reponer. | CU-11\nRF-13 | El sistema debe estimar para cuántos usos alcanza cada producto y clasificarlo en \"Sin stock\", \"Stock bajo\" (menos de 2 usos), \"Con stock\" o \"Sin consumo\". | CU-11\nRF-14 | El sistema debe permitir ordenar por urgencia, valor o nombre, y filtrar las semillas y los insumos por estado. | CU-11\nRF-15 | Los tableros deben ser de solo lectura y accesibles para los tres roles. | CU-10, CU-11\nRF-16 | El asistente debe verificar que la consulta trate sobre AgroControl y rechazar los temas ajenos. | CU-09\nRF-17 | El asistente debe responder únicamente con la documentación y los datos del sistema, e informar cuando no encuentra lo solicitado. | CU-09",
 "peso": 0.8,
-"id": 137,
+"id": 149,
 "conceptos": {
+"cu:09": 2,
 "cu:11": 2,
 "ent:lote": 2,
 "ent:semilla": 2,
-"ent:insumo": 1,
+"ent:insumo": 2,
 "ent:campania": 2,
 "ent:usuario": 1,
 "con:stock": 4
@@ -1978,10 +2148,30 @@ export const GRAFO: Grafo = {
 },
 {
 "fuente": "Requerimientos",
+"titulo": "Requerimientos funcionales",
+"texto": "RF-18 | El asistente debe poder consultar stock, lotes, campañas, labores, siembras, cosechas, percances y rinde, sin modificar datos ni acceder a los usuarios. | CU-09\nRF-19 | El asistente debe avisar al Productor que su rol solo permite consultar cuando pregunte cómo cargar o modificar información. | CU-09\nRF-20 | El sistema no debe almacenar las conversaciones. | CU-09",
+"peso": 0.8,
+"id": 150,
+"conceptos": {
+"cu:09": 2,
+"cu:11": 1,
+"ent:lote": 1,
+"ent:campania": 1,
+"ent:siembra": 1,
+"ent:labor": 1,
+"ent:cosecha": 1,
+"ent:percance": 1,
+"ent:usuario": 2,
+"con:stock": 1,
+"con:rinde": 1
+}
+},
+{
+"fuente": "Requerimientos",
 "titulo": "Requerimientos no funcionales",
 "texto": "Código | Tipo | Descripción\nRNF-01 | Animaciones | El robot flota, sigue el puntero, parpadea y reacciona a cada mensaje. El panel y los mensajes se muestran con transiciones.\nRNF-02 | Animaciones | Si el usuario configuró movimiento reducido, se suprimen los desplazamientos y quedan solo fundidos y el parpadeo e iluminación de los ojos del robot.\nRNF-03 | Desempeño | El robot 3D se carga recién en la primera apertura del chat, separado de la carga inicial, y su animación se pausa con el chat cerrado.\nRNF-04 | Desempeño | La consulta de los tableros debe completarse en menos de 5 segundos bajo condiciones normales de uso (según Visión 8.3).\nRNF-05 | Accesibilidad | El chat debe poder operarse con teclado: foco en el mensaje al abrir, Enter envía, Shift+Enter agrega una línea y Escape cierra y devuelve el foco al botón.\nRNF-06 | Accesibilidad | Los controles del chat y las columnas de los gráficos deben tener descripción textual, y los mensajes nuevos deben anunciarse a lectores de pantalla.",
 "peso": 0.8,
-"id": 138,
+"id": 151,
 "conceptos": {
 "ent:usuario": 1
 }
@@ -1989,11 +2179,12 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Requerimientos",
 "titulo": "Requerimientos no funcionales",
-"texto": "RNF-07 | Accesibilidad | Las variaciones de los indicadores no deben comunicarse solo con color: incluyen flecha y texto.\nRNF-08 | Adaptabilidad | En pantallas de hasta 640 px el chat ocupa casi todo el ancho y se ajusta al teclado; los indicadores se muestran de a dos. Hasta 900 px los gráficos se apilan.\nRNF-09 | Seguridad | Los datos de los tableros requieren un token válido y un rol habilitado.",
+"texto": "RNF-07 | Accesibilidad | Las variaciones de los indicadores no deben comunicarse solo con color: incluyen flecha y texto.\nRNF-08 | Adaptabilidad | En pantallas de hasta 640 px el chat ocupa casi todo el ancho y se ajusta al teclado; los indicadores se muestran de a dos. Hasta 900 px los gráficos se apilan.\nRNF-09 | Seguridad | Los datos de los tableros requieren un token válido y un rol habilitado.\nRNF-10 | Seguridad | Las consultas del asistente a la base se ejecutan en transacciones de solo lectura. La clave del servicio externo se guarda solo en el servidor.\nRNF-11 | Seguridad | Los datos necesarios para cada respuesta se envían a un servicio externo de lenguaje; no se envían usuarios ni contraseñas.\nRNF-12 | Desempeño | Cada usuario puede enviar hasta 8 mensajes por minuto, de hasta 500 caracteres. El límite se controla por instancia del servidor.\nRNF-13 | Desempeño | La documentación se consulta desde un grafo generado previamente, sin leer los documentos en cada consulta.",
 "peso": 0.8,
-"id": 139,
+"id": 152,
 "conceptos": {
-"ent:usuario": 1
+"cu:09": 1,
+"ent:usuario": 3
 }
 },
 {
@@ -2001,7 +2192,7 @@ export const GRAFO: Grafo = {
 "titulo": "Cálculo de los indicadores",
 "texto": "Indicador | Cálculo\nProducción | Suma de kilos por hectárea × superficie, en toneladas.\nRinde | Kilos totales / hectáreas cosechadas.\nInversión por hectárea | Costo total / superficie. En doble cultivo, la superficie del lote se cuenta una vez por campaña.\nCosto por tonelada | Costo total / toneladas producidas.\nMultiplicación de semilla | Toneladas producidas / toneladas sembradas.\nKilos por cada $1.000 | Kilos producidos / (costo total / 1.000).\nCosto total | Semilla (cantidad sembrada × precio actual) + labores (costo base actual) + insumos y percances (costo registrado).\nAlcanza para | Stock / (consumido / usos).\nValor en stock | Stock × precio actual.",
 "peso": 0.8,
-"id": 140,
+"id": 153,
 "conceptos": {
 "cu:10": 1,
 "ent:lote": 1,
@@ -2022,7 +2213,7 @@ export const GRAFO: Grafo = {
 "titulo": "1 - Introducción > 1.1 Propósito del documento",
 "texto": "El propósito de este documento es recoger, analizar y definir las necesidades de alto nivel y las características del sistema AgroControl, una plataforma web destinada a la gestión productiva de unidades agropecuarias.",
 "peso": 0.5,
-"id": 141,
+"id": 154,
 "conceptos": {}
 },
 {
@@ -2030,7 +2221,7 @@ export const GRAFO: Grafo = {
 "titulo": "1 - Introducción > 1.2 Alcance",
 "texto": "El documento Visión se ocupa del sistema AgroControl, orientado a la gestión de lotes, campañas, labores técnicas e insumos agropecuarios. Este documento será utilizado como referencia en la cátedra de Introducción a la Práctica Profesional.",
 "peso": 0.5,
-"id": 142,
+"id": 155,
 "conceptos": {
 "ent:lote": 1,
 "ent:insumo": 1,
@@ -2043,7 +2234,7 @@ export const GRAFO: Grafo = {
 "titulo": "1 - Introducción > 1.3 Definiciones, Acrónimos y Abreviaciones",
 "texto": "Lote: unidad productiva mínima del sistema, identificada geográficamente dentro de una explotación agropecuaria.\nCampaña: período productivo asociado a uno o más cultivos dentro de un lote, pudiendo incluir esquemas de doble cultivo (invierno/verano).\nLabor / Intervención técnica: acción realizada sobre un lote (siembra, fumigación, fertilización, cosecha, etc.).\nInsumo: material utilizado en una intervención técnica (fertilizantes, herbicidas, insecticidas, semillas, etc.).\nCU: Caso de Uso.",
 "peso": 0.5,
-"id": 143,
+"id": 156,
 "conceptos": {
 "ent:lote": 3,
 "ent:semilla": 1,
@@ -2060,7 +2251,7 @@ export const GRAFO: Grafo = {
 "titulo": "1 - Introducción > 1.5 Visión general del documento",
 "texto": "En la sección 2 se describe el posicionamiento del producto con una definición resumida del problema y la posición particular que ocupará en el mercado. En la sección 3 se describen los interesados y los usuarios afectados por el producto. En la sección 4 se realiza una visión general del producto. En la sección 5 se mencionan las características del producto. En la sección 6 se destacan las restricciones. En la sección 7 se mencionan las precedencias y prioridades. En la sección 8 se describen los atributos de calidad del producto.",
 "peso": 0.5,
-"id": 144,
+"id": 157,
 "conceptos": {
 "ent:usuario": 1
 }
@@ -2070,7 +2261,7 @@ export const GRAFO: Grafo = {
 "titulo": "2 - Posicionamiento > 2.1 Sentencia que define el problema",
 "texto": "El problema de: | Dispersión y pérdida de información sobre labores e insumos aplicados en cada lote. Impossibilidad de calcular con precisión el costo por hectárea. Ausencia de historial por lote que permita comparar campañas. Falta de control de stock de insumos. Dificultad para medir la rentabilidad por cultivo y campaña.\nAfecta a: | Productores agropecuarios e ingenieros agrónomos.\nEl impacto del mismo es: | Decisiones productivas y económicas basadas en información incompleta o incorrecta. Sobrestock o faltante de insumos. Imposibilidad de identificar qué cultivos o prácticas son más rentables.\nUna solución satisfactoria sería: | Centralizar en una plataforma web el registro de todas las intervenciones técnicas, el consumo de insumos y los costos por lote y campaña, habilitando la generación automática de informes de rendimiento y rentabilidad.",
 "peso": 0.5,
-"id": 145,
+"id": 158,
 "conceptos": {
 "ent:lote": 3,
 "ent:insumo": 4,
@@ -2086,7 +2277,7 @@ export const GRAFO: Grafo = {
 "titulo": "2 - Posicionamiento > 2.2 Sentencia que define la posición del Producto",
 "texto": "Para: | Productores agropecuarios e ingenieros agrónomos.\nQuienes: | Gestionan y asesoran explotaciones agropecuarias.\nEl producto: | AgroControl es un sistema web\nQue: | Permitirá registrar labores técnicas, controlar el stock de insumos y calcular costos y rendimientos por lote y campaña.\nA diferencia de: | El proceso manual actual basado en planillas y registros en papel.\nNuestro producto: | Centralizará toda la información productiva, permitirá el seguimiento completo del ciclo de cada lote a lo largo de sus campañas, automatizará el cálculo de costos, ingresos y márgenes, y habilitará el análisis histórico y la comparación de campañas, facilitando la toma de decisiones productivas y económicas basadas en datos.",
 "peso": 0.5,
-"id": 146,
+"id": 159,
 "conceptos": {
 "ent:lote": 2,
 "ent:insumo": 1,
@@ -2101,7 +2292,7 @@ export const GRAFO: Grafo = {
 "titulo": "2 - Posicionamiento > 3.1 Características del mercado",
 "texto": "El mercado objetivo son los productores agropecuarios y los ingenieros agrónomos que operan en el sector agrícola de la región. Ambos perfiles poseen conocimientos básicos de informática y acceso a dispositivos con conexión a internet.\nLa versión inicial del sistema estará orientada a explotaciones agropecuarias de pequeña y mediana escala. Cada productor podrá gestionar una cantidad ilimitada de lotes y campañas. La plataforma es de acceso web, sin requerir instalación local.",
 "peso": 0.5,
-"id": 147,
+"id": 160,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 1
@@ -2112,7 +2303,7 @@ export const GRAFO: Grafo = {
 "titulo": "2 - Posicionamiento > 3.2 Resumen de Interesados que no son usuarios",
 "texto": "Nombre | Descripción | Responsabilidades\nProductor Agropecuario | Propietario o responsable de la explotación agropecuaria | Define las políticas de gestión de lotes y campañas. Responsable de la toma de decisiones productivas y económicas.",
 "peso": 0.5,
-"id": 148,
+"id": 161,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 1,
@@ -2124,7 +2315,7 @@ export const GRAFO: Grafo = {
 "titulo": "2 - Posicionamiento > 3.3 Resumen de Usuarios",
 "texto": "Nombre | Descripción | Responsabilidades\nProductor Agropecuario | Propietario o responsable de la explotación agropecuaria | Registrar labores, insumos y costos por lote. Consultar informes de rendimiento y rentabilidad.\nIngeniero Agrónomo | Profesional técnico y asesor del productor | Registrar intervenciones técnicas. Consultar historial de labores y consumo de insumos por lote y campaña.",
 "peso": 0.5,
-"id": 149,
+"id": 162,
 "conceptos": {
 "ent:lote": 2,
 "ent:insumo": 2,
@@ -2140,7 +2331,7 @@ export const GRAFO: Grafo = {
 "titulo": "2 - Posicionamiento > 3.4 Entorno del usuario",
 "texto": "Tanto los productores como los ingenieros agrónomos cuentan con acceso a internet desde computadoras de escritorio, portátiles o dispositivos móviles. El sistema es de naturaleza web y no requiere operación fuera de línea.\nEl uso del sistema se concentra en los períodos de siembra, aplicaciones y cosecha, con picos de actividad durante las campañas activas. El sistema actual es un proceso completamente manual, basado en planillas de cálculo (Como Excel) o registros en papel, sin integración entre lotes ni campañas, generando así perdida de información importante.",
 "peso": 0.5,
-"id": 150,
+"id": 163,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 2,
@@ -2154,7 +2345,7 @@ export const GRAFO: Grafo = {
 "titulo": "Dueño del campo",
 "texto": "Representante: | A determinar\nDescripción | Propietario o responsable del terreno. Posee conocimientos básicos de informática.\nTipo | Stakeholder principal\nResponsabilidades | Define las políticas de gestión de lotes y campañas. Responsable final de la toma de decisiones económicas y aprobación de presupuestos.\nCriterios de éxito | Contar con información centralizada y precisa sobre costos, insumos y rendimiento por lote y campaña.\nParticipación | Revisor de requerimientos. Aprobación del sistema.\nEntregables | No\nComentarios / problemas | No",
 "peso": 0.5,
-"id": 151,
+"id": 164,
 "conceptos": {
 "ent:lote": 2,
 "ent:insumo": 1,
@@ -2168,7 +2359,7 @@ export const GRAFO: Grafo = {
 "titulo": "Productor Agropecuario",
 "texto": "Representante | A determinar\nDescripción | Posee conocimientos básicos de informática y manejo de herramientas web.\nTipo | Usuario principal\nResponsabilidades | Registrar labores, insumos y costos por lote. Consultar informes de rendimiento y rentabilidad.\nCriterios de éxito | Que el sistema centralice toda la información productiva y calcule automáticamente los costos por hectárea.\nParticipación | Revisor de requerimientos y pruebas de aceptación.\nEntregables | Informes de costo por hectárea, rendimiento y rentabilidad por campaña.\nComentarios / problemas | No",
 "peso": 0.5,
-"id": 152,
+"id": 165,
 "conceptos": {
 "ent:lote": 1,
 "ent:insumo": 1,
@@ -2184,7 +2375,7 @@ export const GRAFO: Grafo = {
 "titulo": "Ingeniero Agrónomo",
 "texto": "Representante | A determinar\nDescripción | Profesional con conocimientos técnicos agronómicos y manejo de herramientas digitales.\nTipo | Usuario secundario\nResponsabilidades | Registrar intervenciones técnicas. Consultar historial de labores y consumo de insumos por lote y campaña.\nCriterios de éxito | Que el sistema registre con precisión cada intervención y permita consultar el historial técnico de cada lote.\nParticipación | Revisor de requerimientos y pruebas de aceptación.\nEntregables | Historial de labores e insumos por lote y campaña.\nComentarios / problemas | No",
 "peso": 0.5,
-"id": 153,
+"id": 166,
 "conceptos": {
 "ent:lote": 3,
 "ent:insumo": 2,
@@ -2198,7 +2389,7 @@ export const GRAFO: Grafo = {
 "titulo": "2 - Posicionamiento > 3.8 Alternativas y competencia",
 "texto": "Existen en el mercado herramientas de gestión agropecuaria como Agroinsider, Kilimo y AgriTask, orientadas principalmente a grandes explotaciones con integración satelital y sensores IoT. Dichas herramientas presentan alta complejidad de implementación y costo elevado para productores medianos.\nAgroControl se diferencia por su simplicidad de uso, orientación a la gestión granular por lote y campaña, y por ser una solución web accesible sin infraestructura adicional.",
 "peso": 0.5,
-"id": 154,
+"id": 167,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 1,
@@ -2210,7 +2401,7 @@ export const GRAFO: Grafo = {
 "titulo": "4 - Visión general del producto",
 "texto": "Esta sección proporciona una vista de alto nivel de las capacidades del sistema AgroControl.",
 "peso": 0.5,
-"id": 155,
+"id": 168,
 "conceptos": {}
 },
 {
@@ -2218,7 +2409,7 @@ export const GRAFO: Grafo = {
 "titulo": "4 - Visión general del producto > 4.1 Perspectiva del producto",
 "texto": "AgroControl sustituirá el proceso manual actual de registro de labores e insumos, centralizado en planillas de cálculo y registros en papel, por una plataforma web integrada que permita el seguimiento completo de cada lote a lo largo de sus campañas, así asegurando la integridad de los datos en el tiempo y evitar pérdidas de información.",
 "peso": 0.5,
-"id": 156,
+"id": 169,
 "conceptos": {
 "ent:lote": 1,
 "ent:insumo": 1,
@@ -2231,7 +2422,7 @@ export const GRAFO: Grafo = {
 "titulo": "4 - Visión general del producto > 4.2 Resumen de los principales beneficios",
 "texto": "Beneficio | Características del sistema\nGestión integral del ciclo productivo del lote | CU Asignar Lote CU Cerrar Campaña\nRegistro y control de la implantación del cultivo | CU Registro y control de la implantación del cultivo\nSeguimiento de labores y mantenimiento del lote | CU Registrar Labor de Mantenimiento\nComparación histórica entre campañas | CU Comparar campañas CU Informe de rendimiento por período\nRegistro del rendimiento productivo | CU Registrar Cosecha",
 "peso": 0.5,
-"id": 157,
+"id": 170,
 "conceptos": {
 "cu:01": 1,
 "cu:03": 2,
@@ -2249,7 +2440,7 @@ export const GRAFO: Grafo = {
 "titulo": "4 - Visión general del producto > 4.3 Presuposiciones y dependencias",
 "texto": "Se supone que el financiamiento del proyecto estará disponible para su desarrollo. La implementación del sistema se realizaría durante el año 2026. Se asume que los usuarios cuentan con acceso a internet y dispositivos compatibles con navegadores web modernos.",
 "peso": 0.5,
-"id": 158,
+"id": 171,
 "conceptos": {
 "ent:usuario": 1,
 "est:libre": 1
@@ -2260,7 +2451,7 @@ export const GRAFO: Grafo = {
 "titulo": "4 - Visión general del producto > 4.4 Costos y Precios",
 "texto": "No completado en esta versión del documento.",
 "peso": 0.5,
-"id": 159,
+"id": 172,
 "conceptos": {
 "con:costo": 1
 }
@@ -2270,7 +2461,7 @@ export const GRAFO: Grafo = {
 "titulo": "4 - Visión general del producto > 4.5 Licencias e instalación",
 "texto": "El sistema será desarrollado con software libre, de acuerdo con la política de la Facultad. No se requiere instalación local por parte del usuario, ya que el acceso es completamente vía web.",
 "peso": 0.5,
-"id": 160,
+"id": 173,
 "conceptos": {
 "ent:usuario": 1,
 "est:libre": 1
@@ -2281,7 +2472,7 @@ export const GRAFO: Grafo = {
 "titulo": "5 - Características del producto",
 "texto": "En esta sección se definen y describen las características del sistema AgroControl. Las características son las capacidades de alto nivel del sistema necesarias para ofrecer beneficios a los usuarios.",
 "peso": 0.5,
-"id": 161,
+"id": 174,
 "conceptos": {
 "ent:usuario": 1
 }
@@ -2291,7 +2482,7 @@ export const GRAFO: Grafo = {
 "titulo": "Registrar labor en lote",
 "texto": "El usuario selecciona la campaña activa, el lote y el tipo de labor\n(por ejemplo: barbecho, siembra, fertilización, aplicación de herbicidas,\naplicación de insecticidas, cosecha).\nEl sistema verifica que el lote tenga un cultivo asignado y que haya stock suficiente del insumo a utilizar.\nEl usuario ingresa los insumos, cantidades y costos.\nEl sistema registra la intervención, descuenta el stock y emite un comprobante.",
 "peso": 0.5,
-"id": 162,
+"id": 175,
 "conceptos": {
 "cu:03": 1,
 "ent:lote": 3,
@@ -2311,7 +2502,7 @@ export const GRAFO: Grafo = {
 "titulo": "Registrar insumo",
 "texto": "El usuario ingresa los datos del insumo (tipo, cantidad, costo unitario, descripción, etc). El sistema lo registra en el inventario.",
 "peso": 0.5,
-"id": 163,
+"id": 176,
 "conceptos": {
 "ent:insumo": 2,
 "ent:usuario": 1,
@@ -2323,7 +2514,7 @@ export const GRAFO: Grafo = {
 "titulo": "Consultar y controlar stock",
 "texto": "El sistema verifica la disponibilidad de stock al momento de registrar una intervención. Si el stock es insuficiente, notifica el error al usuario.",
 "peso": 0.5,
-"id": 164,
+"id": 177,
 "conceptos": {
 "ent:usuario": 1,
 "con:stock": 3
@@ -2334,7 +2525,7 @@ export const GRAFO: Grafo = {
 "titulo": "Mantenimiento de lotes",
 "texto": "El usuario ingresa o modifica los datos de un lote (nombre, superficie en hectáreas). El sistema los registra.",
 "peso": 0.5,
-"id": 165,
+"id": 178,
 "conceptos": {
 "ent:lote": 2,
 "ent:usuario": 1
@@ -2345,7 +2536,7 @@ export const GRAFO: Grafo = {
 "titulo": "Mantenimiento de campañas",
 "texto": "El usuario crea una campaña asociada a un lote y un cultivo. El sistema permite cambiar el cultivo entre campañas y mantiene el historial de campañas anteriores. El sistema valida que no exista más de un cultivo activo simultáneamente para un mismo lote.",
 "peso": 0.5,
-"id": 166,
+"id": 179,
 "conceptos": {
 "ent:lote": 2,
 "ent:campania": 4,
@@ -2357,7 +2548,7 @@ export const GRAFO: Grafo = {
 "titulo": "Mantenimiento de cultivos y variedades",
 "texto": "El usuario puede consultar el catálogo predefinido de cultivos y variedades. Si el cultivo o variedad requerida no existe, el usuario puede incorporarlo al catálogo.",
 "peso": 0.5,
-"id": 167,
+"id": 180,
 "conceptos": {
 "ent:usuario": 2,
 "pan:catalogos": 2
@@ -2368,7 +2559,7 @@ export const GRAFO: Grafo = {
 "titulo": "Mantenimiento de insumos",
 "texto": "El usuario puede consultar y ampliar el catálogo de insumos disponibles en el sistema.",
 "peso": 0.5,
-"id": 168,
+"id": 181,
 "conceptos": {
 "ent:insumo": 2,
 "ent:usuario": 1,
@@ -2380,7 +2571,7 @@ export const GRAFO: Grafo = {
 "titulo": "Informe de costo por hectárea",
 "texto": "El usuario selecciona un lote y una campaña. El sistema calcula y muestra el costo total por hectárea desagregado por tipo de labor e insumo.",
 "peso": 0.5,
-"id": 169,
+"id": 182,
 "conceptos": {
 "ent:lote": 1,
 "ent:insumo": 1,
@@ -2395,7 +2586,7 @@ export const GRAFO: Grafo = {
 "titulo": "Informe de rendimiento y rentabilidad",
 "texto": "El usuario selecciona un período. El sistema genera un informe con el rendimiento por lote, los costos, las ganancias y la comparación entre campañas.\nInforme de ingresos por lote\nEl usuario selecciona un lote y una campaña. El sistema calcula y muestra\nlos ingresos brutos generados a partir de la producción obtenida.\nDetalle de insumos por campaña\nEl usuario selecciona un lote y una campaña. El sistema muestra el detalle\nde todos los insumos utilizados, incluyendo tipo, cantidad y costo total\nasociado a cada intervención.\nInforme de margen bruto\nEl usuario selecciona un lote y una campaña. El sistema calcula el margen\nbruto total, considerando los ingresos y los costos asociados.\nInforme de labores por campaña\nEl usuario selecciona un lote y una campaña. El sistema muestra el listado\nde todas las labores realizadas, indicando tipo de labor, fecha e insumos utilizados.\nEn campañas con doble cultivo, los informes permitirán visualizar\ntanto los resultados consolidados de la campaña como el detalle\nindividual por cada cultivo.",
 "peso": 0.5,
-"id": 170,
+"id": 183,
 "conceptos": {
 "ent:lote": 6,
 "ent:insumo": 3,
@@ -2412,7 +2603,7 @@ export const GRAFO: Grafo = {
 "titulo": "Tablero de rinde",
 "texto": "El usuario consulta las campañas cerradas y las filtra por lote, campaña y cultivo. El sistema muestra indicadores, gráficos y la comparación con otras campañas del mismo lote.",
 "peso": 0.5,
-"id": 171,
+"id": 184,
 "conceptos": {
 "ent:lote": 2,
 "ent:campania": 3,
@@ -2425,7 +2616,7 @@ export const GRAFO: Grafo = {
 "titulo": "Tablero de stock",
 "texto": "El usuario consulta las semillas e insumos. El sistema muestra su stock, su valor, para cuántos usos alcanza y qué se debe reponer.",
 "peso": 0.5,
-"id": 172,
+"id": 185,
 "conceptos": {
 "cu:11": 1,
 "ent:semilla": 1,
@@ -2439,7 +2630,7 @@ export const GRAFO: Grafo = {
 "titulo": "Consultar asistente",
 "texto": "El usuario abre el chat desde cualquier pantalla, escribe una consulta y el asistente Agrobot la responde.",
 "peso": 0.5,
-"id": 173,
+"id": 186,
 "conceptos": {
 "cu:09": 3,
 "ent:usuario": 1
@@ -2450,7 +2641,7 @@ export const GRAFO: Grafo = {
 "titulo": "6 - Restricciones",
 "texto": "El sistema deberá ser desarrollado con software libre, de acuerdo con la política de la Facultad.\nEl sistema es exclusivamente de tipo web. No se contempla versión de escritorio ni funcionamiento fuera de línea.\nNo se incluyen como funciones del sistema: la reserva de insumos, la integración con sistemas contables externos, la asignación de maquinaria o personal a labores, ni la gestión de compras de insumos.\nUn lote no podrá tener más de un cultivo activo en simultáneo dentro de una misma campaña. El sistema deberá validar esta condición al momento de registrar una campaña o asignar un cultivo a un lote.\nEl sistema gestionará únicamente el control interno del stock de insumos, registrando altas, consumos y disponibilidad asociada a las intervenciones técnicas. No se incluye la gestión de compras, proveedores, pagos ni procesos logísticos vinculados al abastecimiento de insumos.",
 "peso": 0.5,
-"id": 174,
+"id": 187,
 "conceptos": {
 "ent:lote": 2,
 "ent:insumo": 4,
@@ -2465,7 +2656,7 @@ export const GRAFO: Grafo = {
 "titulo": "7 - Precedencias y prioridades",
 "texto": "El proceso principal y de mayor prioridad es la gestión de intervenciones técnicas por lote, ya que es la actividad más frecuente y la que alimenta todos los informes de costos y rendimiento. En segundo orden de prioridad se ubica la gestión de insumos y stock, seguida de la gestión de lotes y campañas. Los informes y análisis comparativos tienen prioridad deseable.",
 "peso": 0.5,
-"id": 175,
+"id": 188,
 "conceptos": {
 "cu:00": 1,
 "ent:lote": 2,
@@ -2481,7 +2672,7 @@ export const GRAFO: Grafo = {
 "titulo": "8 - Otros Requerimientos del Producto > 8.1 Requerimientos del sistema",
 "texto": "El sistema deberá funcionar sobre infraestructura compatible con software libre. El acceso será mediante navegadores web modernos (Chrome, Firefox, Edge) sin requerir instalación adicional en el cliente.",
 "peso": 0.5,
-"id": 176,
+"id": 189,
 "conceptos": {
 "est:libre": 1
 }
@@ -2491,7 +2682,7 @@ export const GRAFO: Grafo = {
 "titulo": "8 - Otros Requerimientos del Producto > 8.2 Requerimientos de Seguridad",
 "texto": "Para utilizar el sistema el usuario debe autenticarse con usuario y contraseña. El sistema habilitará las funciones correspondientes al perfil del usuario (productor o ingeniero agrónomo).",
 "peso": 0.5,
-"id": 177,
+"id": 190,
 "conceptos": {
 "ent:usuario": 4
 }
@@ -2501,7 +2692,7 @@ export const GRAFO: Grafo = {
 "titulo": "8 - Otros Requerimientos del Producto > 8.3 Requerimientos de Desempeño",
 "texto": "El registro de una intervención técnica y la consulta de informes deberán completarse en menos de 5 segundos bajo condiciones normales de uso.",
 "peso": 0.5,
-"id": 178,
+"id": 191,
 "conceptos": {}
 },
 {
@@ -2509,7 +2700,7 @@ export const GRAFO: Grafo = {
 "titulo": "8 - Otros Requerimientos del Producto > 8.4 Requerimientos de Disponibilidad",
 "texto": "El sistema deberá estar disponible 24 horas al día los 7 días a la semana (24×7), con no más de un 10% de tiempo de inactividad programado.",
 "peso": 0.5,
-"id": 179,
+"id": 192,
 "conceptos": {
 "est:libre": 1
 }
@@ -2519,7 +2710,7 @@ export const GRAFO: Grafo = {
 "titulo": "8 - Otros Requerimientos del Producto > 8.5 Requerimientos de Usabilidad",
 "texto": "El sistema debe ser intuitivo y fácil de usar para usuarios con conocimientos básicos de informática. No se requerirá capacitación formal para su operación cotidiana. El sistema deberá incluir mensajes de error claros y ayuda contextual en línea.\nEl asistente y los tableros deberán poder utilizarse desde dispositivos móviles, con teclado y con movimiento reducido.",
 "peso": 0.5,
-"id": 180,
+"id": 193,
 "conceptos": {
 "cu:09": 1,
 "ent:usuario": 1
@@ -2530,7 +2721,7 @@ export const GRAFO: Grafo = {
 "titulo": "8 - Otros Requerimientos del Producto > 8.6 Requisitos de documentación",
 "texto": "No completado en esta versión del documento.",
 "peso": 0.5,
-"id": 181,
+"id": 194,
 "conceptos": {}
 },
 {
@@ -2538,7 +2729,7 @@ export const GRAFO: Grafo = {
 "titulo": "8 - Otros Requerimientos del Producto > 8.7 Estándares aplicables",
 "texto": "No completado en esta versión del documento.",
 "peso": 0.5,
-"id": 182,
+"id": 195,
 "conceptos": {}
 },
 {
@@ -2546,7 +2737,7 @@ export const GRAFO: Grafo = {
 "titulo": "Descripción Del Negocio",
 "texto": "La producción agropecuaria de la zona se organiza y estructura en base a campañas agrícolas, las cuales contemplan, generalmente, dos años (Por ejemplo, Campaña 2025/2026). Cada campaña corresponde a un lote, el cual es medido en hectáreas, y este es la unidad productiva fundamental del negocio. En un lote puede haber, como máximo, un cultivo en simultaneo, pero ese lote puede usarse para varios cultivos en el tiempo.\nLas semillas que se utilizan en un cultivo corresponden a temporadas en específico, dividas en temporadas de invierno y de verano, generando así la posibilidad de un doble cultivo en el mismo lote y campaña.\nUn proceso agrícola comienza con la planificación y la preparación del suelo, llamado “Barbecho previo”, el cual se encarga de preparar el suelo para que este en óptimas condiciones para la siembra. Una vez este realizado el barbecho previo, y las condiciones climáticas sean las ideales para la siembra, el procedimiento que se sigue es el siguiente:",
 "peso": 0.6,
-"id": 183,
+"id": 196,
 "conceptos": {
 "ent:lote": 4,
 "ent:semilla": 1,
@@ -2561,7 +2752,7 @@ export const GRAFO: Grafo = {
 "titulo": "Descripción Del Negocio",
 "texto": "1 – Se selecciona el Lote a utilizar, y se define la semilla a sembrar dependiendo de la temporada, es decir, si hacer siembra de invierno o de verano.\n2 – Al momento de la siembra se suelen aplicar fertilizantes, la siembra se realiza siguiendo parámetros específicos como la distancia entre surcos, que suele ser de 52,5 cm.\n3 – Hasta la fecha de la cosecha, se realizan labores de mantenimiento al cultivo, estas labores son:\nAplicar Herbicidas: La aplicación del mismo depende del tamaño de la maleza y cobertura.\nAplicar Fertilizante: Siempre se hace en la siembra, y durante el mantenimiento se realiza un análisis del suelo, el cual analiza los minerales de la tierra para determinar cuánto usar del fertilizante.\nAplicar Insecticida: Suele ser la labor más dinámica, ya que se basa en la cantidad de insectos en el momento (como convenio, si hay 1 insecto por metro de surco, se aplica el insumo).",
 "peso": 0.6,
-"id": 184,
+"id": 197,
 "conceptos": {
 "ent:lote": 1,
 "ent:semilla": 1,
@@ -2576,7 +2767,7 @@ export const GRAFO: Grafo = {
 "titulo": "Descripción Del Negocio",
 "texto": "4 – El ciclo productivo termina con la cosecha, evaluando la cantidad de kilos cosechados por hectárea y la humedad del mismo, una vez se realiza la cosecha, se puede dar por finalizada la campaña, cerrando el lote.\nEn general, una campaña corresponde a un cultivo singular en un lote, sin embargo, hay ocasiones donde se realiza un doble cultivo, el cual consiste en sembrar en las dos temporadas, invierno y verano. En este caso, la campaña se da por finalizada cuando se cierra el lote después del segundo cultivo.\nCuando hay doble cultivo, entre la cosecha del primer cultivo y la siembra del segundo, se realiza un “Barbecho intermedio”, que consta de preparar la tierra para la segunda siembra.",
 "peso": 0.6,
-"id": 185,
+"id": 198,
 "conceptos": {
 "ent:lote": 3,
 "ent:campania": 3,
@@ -2592,7 +2783,7 @@ export const GRAFO: Grafo = {
 "titulo": "Descripción Del Sistema",
 "texto": "AgroControl está diseñado para que el productor agropecuario pueda realizar el seguimiento detallado de sus unidades productivas (lotes) a lo largo de cada campaña. El sistema permitirá la gestión granular por hectárea, cultivo y variedad de semilla, centralizando el registro de todas las intervenciones técnicas y el consumo de insumos (fertilizantes, insecticidas, herbicidas, etc).\nEl ingeniero agrónomo nos comentó que sería de gran utilidad que el sistema contemplara la gestión del stock de los insumos utilizados en cada labor, como así también permitir el registro de las labores realizadas en cada etapa de la campaña, calculando los gastos totales de cada intervención.\nAdemás, el ingeniero agrónomo nos habló sobre la posibilidad de consultar campañas anteriores para poder comparar entre ellas, ante esto, el sistema registrará el historial de los lotes y sus respectivas campañas, permitiendo realizar consultas y comparativas a lo largo del tiempo.",
 "peso": 0.6,
-"id": 186,
+"id": 199,
 "conceptos": {
 "ent:lote": 2,
 "ent:semilla": 1,
@@ -2607,7 +2798,7 @@ export const GRAFO: Grafo = {
 "titulo": "Descripción Del Sistema",
 "texto": "El sistema deberá registrar tanto los lotes y sus atributos (como la cantidad de hectáreas) como la semilla y sus tipos, incluyendo el stock de cada una. Además, deberá contar con labores predefinidas para su carga ágil. Durante la charla, el ingeniero agrónomo nos comentó que las labores más comunes son:\nSiembra.\nAplicación de Fertilizante.\nAplicación de Herbicida.\nAplicación de Insecticida.\nCosecha.\nCada insumo utilizado durante una labor estará registrado en el sistema junto con su stock asociado.",
 "peso": 0.6,
-"id": 187,
+"id": 200,
 "conceptos": {
 "ent:lote": 1,
 "ent:semilla": 1,
@@ -2623,7 +2814,7 @@ export const GRAFO: Grafo = {
 "titulo": "Reglas de negocio",
 "texto": "Derivada de la charla con el ingeniero agrónomo, podemos aclarar las siguientes reglas de negocio:\nRN01: Un Lote no debe tener más de un cultivo activo de manera simultánea.\nRN02: La siembra de un cultivo debe realizarse dentro de su fecha optima predefinida y con el barbecho previamente realizado.\nRN02: Toda semilla debe pertenecer a una temporada predeterminada.\nRN03: Toda semilla tiene una fecha optima de siembra.\nRN04: El cierre de campaña debe realizarse una vez finalizada la cosecha del cultivo y cierre del lote.\nRN05: Un lote puede albergar más de un cultivo en el tiempo.\nRN06: Una campaña de doble cultivo inicia con la siembra del primer cultivo de invierno y finaliza con la cosecha del segundo cultivo de verano.\nRN07: Una campaña corresponde al ciclo productivo de un lote dentro de un período determinado.\nRN08: Una campaña puede contemplar uno o dos cultivos de manera secuencial (doble cultivo).\nRN09: En un esquema de doble cultivo, el segundo cultivo solo puede iniciarse una vez finalizada la cosecha del primero.",
 "peso": 0.6,
-"id": 188,
+"id": 201,
 "conceptos": {
 "cu:05": 1,
 "ent:lote": 4,
@@ -2640,7 +2831,7 @@ export const GRAFO: Grafo = {
 "titulo": "Reglas de negocio",
 "texto": "RN10: Una campaña se considera finalizada cuando se realiza la cosecha del último cultivo y se cierra el lote.\nRN-11: En caso de doble cultivo, el análisis debe contemplar tanto resultados individuales por cultivo como resultados consolidados del lote.",
 "peso": 0.6,
-"id": 189,
+"id": 202,
 "conceptos": {
 "ent:lote": 2,
 "ent:campania": 1,
@@ -2653,7 +2844,7 @@ export const GRAFO: Grafo = {
 "titulo": "Informes Solicitados",
 "texto": "Durante la charla con el ingeniero agrónomo, nos comentó que sería de gran utilidad que el sistema genere los siguientes informes:\nInforme de ingresos brutos por lote.\nDetalle de insumos utilizados durante la campaña (Tipo de insumo, cantidad y costo final).\nRendimiento de cosecha por lote y campaña (Kilos por hectárea).\nInforme del margen bruto y rentabilidad total del cultivo por lote.\nInforme de Labores realizadas por campaña (tipo de labor,\nNota: En el caso de registrarse un doble cultivo, el informe económico del lote incluirá tanto el margen bruto consolidado de la campaña completa, como los márgenes individuales de cada uno de los cultivos.\nDichos informes tendrán como destinatario final al Productor Agropecuario, quien los utilizará para evaluar la rentabilidad de las unidades productivas y respaldar la toma de futuras decisiones económicas.",
 "peso": 0.6,
-"id": 190,
+"id": 203,
 "conceptos": {
 "ent:lote": 4,
 "ent:insumo": 2,
@@ -2670,7 +2861,7 @@ export const GRAFO: Grafo = {
 "titulo": "Fuera de Alcance",
 "texto": "Para simplificar el trabajo, se excluyen las siguientes funciones que son comunes en el sector agropecuario. No se incluirá como funciones del sistema:\nGestión de mermas físicas (Volátil, Humedad, Zarandeos).\nGestión de seguros contra siniestros (Por ejemplo, granizo).\nGestión de fletes para la comercialización del producto.\nGestión de compra y pago de insumos.\nGestión de asignación de personal a maquinarias.",
 "peso": 0.6,
-"id": 191,
+"id": 204,
 "conceptos": {
 "ent:insumo": 1,
 "ent:percance": 1,
@@ -2682,7 +2873,7 @@ export const GRAFO: Grafo = {
 "titulo": "Estados y transiciones",
 "texto": "flowchart TD\n  ini(( )) -->|EL INGENIERO DECIDE ABRIR LA CAMPAÑA| A(ABIERTA)\n  A -->|EL INGENIERO DECIDE CERRAR LA CAMPAÑA| C(CERRADA)\n  C -->|EL INGENIERO DECIDE BORRAR LA CAMPAÑA| B((\"●\"))\n  C --> fin(((\" \")))\n",
 "peso": 0.8,
-"id": 192,
+"id": 205,
 "conceptos": {
 "ent:campania": 3
 }
@@ -2692,7 +2883,7 @@ export const GRAFO: Grafo = {
 "titulo": "Estados y transiciones",
 "texto": "flowchart TD\n  ini(( )) -->|EL USUARIO INICIA SESIÓN| SA(CERRADO SIN ABRIR)\n  SA -->|EL USUARIO ABRE EL CHAT| A(ABIERTO)\n  A -->|EL USUARIO ENVÍA UN MENSAJE| E(ESPERANDO RESPUESTA)\n  E -->|EL ASISTENTE RESPONDE| A\n  E -->|FALLA LA CONSULTA| A\n  A -->|EL USUARIO CIERRA EL CHAT| C(CERRADO)\n  C -->|EL USUARIO ABRE EL CHAT| A\n  SA -->|EL USUARIO CIERRA SESIÓN| fin(((\" \")))\n  C -->|EL USUARIO CIERRA SESIÓN| fin\n  A -->|EL USUARIO CIERRA SESIÓN| fin\n",
 "peso": 0.8,
-"id": 193,
+"id": 206,
 "conceptos": {
 "cu:09": 1,
 "ent:usuario": 8
@@ -2701,9 +2892,9 @@ export const GRAFO: Grafo = {
 {
 "fuente": "Máquina de estados ME-Insumo",
 "titulo": "Estados y transiciones",
-"texto": "flowchart TD\n  ini(( )) --> CS\n  subgraph G[\" \"]\n    CS(CON STOCK)\n    SS(SIN STOCK)\n  end\n  X{ }\n  CS -->|EL INGENIERO DECIDE REGISTRAR LA LABOR| X\n  X -->|EL INSUMO SE QUEDA SIN STOCK| SS\n  X -->|EL INSUMO SE ENCUENTRA CON STOCK| CS\n  SS -->|EL INGENIERO ACTUALIZA EL STOCK| CS\n  G -->|EL INGENIERO DECIDE DESAHABILITAR EL INSUMO| I(INACTIVO)\n  G --> fin(((\" \")))\n",
+"texto": "flowchart TD\n  ini(( )) --> CS\n  subgraph G[\" \"]\n    CS(CON STOCK)\n    SS(SIN STOCK)\n  end\n  X{ }\n  CS -->|EL INGENIERO DECIDE REGISTRAR LA LABOR| X\n  X -->|EL INSUMO SE QUEDA SIN STOCK| SS\n  X -->|EL INSUMO SE ENCUENTRA CON STOCK| CS\n  SS -->|EL INGENIERO ACTUALIZA EL STOCK| CS\n  G -->|EL INGENIERO DECIDE DESAHABILITAR EL INSUMO| I(INACTIVA)\n  G --> fin(((\" \")))\n",
 "peso": 0.8,
-"id": 194,
+"id": 207,
 "conceptos": {
 "ent:insumo": 4,
 "ent:labor": 1,
@@ -2715,7 +2906,7 @@ export const GRAFO: Grafo = {
 "titulo": "Estados y transiciones",
 "texto": "flowchart TD\n  ini(( )) --> D(DISPONIBLE)\n  D --> fin(((\" \")))\n  D -->|EL INGENIERO DECIDE SEMBRAR EN EL LOTE ELEGIDO| U(EN USO)\n  U -->|EL INGENIERO DECIDE REGISTRAR LA SIEMBRA| S(SEMBRADO)\n  S -->|EL INGENIERO DECIDE REGISTRAR LA COSECHA| C(COSECHADO)\n  C -->|EL INGENIERO DECIDE REALIZAR DOBLE CULTIVO| U\n  C -->|EL INGENIERO DECIDE CERRAR LA CAMPAÑA| D\n",
 "peso": 0.8,
-"id": 195,
+"id": 208,
 "conceptos": {
 "ent:lote": 2,
 "ent:campania": 1,
@@ -2733,7 +2924,7 @@ export const GRAFO: Grafo = {
 "titulo": "Estados y transiciones",
 "texto": "flowchart TD\n  ini(( )) --> CS\n  subgraph G[\" \"]\n    CS(CON STOCK)\n    SS(SIN STOCK)\n  end\n  X{ }\n  CS -->|EL INGENIERO DECIDE REGISTRAR LA SIEMBRA| X\n  X -->|LA SEMILLA SE QUEDA SIN STOCK| SS\n  X -->|LA SEMILLA SE ENCUENTRA CON STOCK| CS\n  SS -->|EL INGENIERO ACTUALIZA EL STOCK| CS\n  G -->|EL INGENIERO DECIDE DESAHABILITAR LA SEMILLA| I(INACTIVA)\n  G --> fin(((\" \")))\n",
 "peso": 0.8,
-"id": 196,
+"id": 209,
 "conceptos": {
 "ent:semilla": 4,
 "ent:siembra": 1,
@@ -2745,7 +2936,7 @@ export const GRAFO: Grafo = {
 "titulo": "ANOTACIONES TERCER CHARLA",
 "texto": "PRECONDICIONES (Negocio):\nCada cultivo tiene su fecha optima predefinida (para sembrar), condicones de suelo, climaticas\nBarbecho ya hecho (aplicacion de herbicidas) semilla lista, disponibilidad de la maquina, y el lote,",
 "peso": 0.9,
-"id": 197,
+"id": 210,
 "conceptos": {
 "ent:lote": 1,
 "ent:semilla": 1,
@@ -2758,7 +2949,7 @@ export const GRAFO: Grafo = {
 "titulo": "Tema campaña",
 "texto": "cierra el lote de un cultivo, se cierra la campaña.\nCuando se hace el barbecho y se siembra devuelta, abre otra campaña.\nUn lote: trigo-soja, es una campaña del lote.\nUn lote por campaña (un lote = doble cultivo)\nCampañas se nombran de a 2 años (ejemplo campaña 2024-2025)\nUna campaña es el doble cultivo, arranca con la siembra del trigo (primer cultivo), termina con la cosecha del segundo cultivo",
 "peso": 0.9,
-"id": 198,
+"id": 211,
 "conceptos": {
 "ent:lote": 5,
 "ent:campania": 8,
@@ -2773,7 +2964,7 @@ export const GRAFO: Grafo = {
 "titulo": "Tema doble cultivo",
 "texto": "costos doble cultivo: Hace falta analisis por cultivo (para saber como le fue a cada uno de los cultivos) y un analisis por lote.",
 "peso": 0.9,
-"id": 199,
+"id": 212,
 "conceptos": {
 "ent:lote": 1,
 "con:doble": 2,
@@ -2785,7 +2976,7 @@ export const GRAFO: Grafo = {
 "titulo": "Posible pasos a tener en cuenta en camino basico",
 "texto": "Primer cosa que se hace es el barbecho (Puede ser una precondicion)\ninicio campaña - barchecho - siembra - cosecha - barbecho - siembra - cosecha - cierre de campaña",
 "peso": 0.9,
-"id": 200,
+"id": 213,
 "conceptos": {
 "cu:05": 1,
 "ent:campania": 2,
@@ -2800,7 +2991,7 @@ export const GRAFO: Grafo = {
 "titulo": "Anotaciones de segunda charla",
 "texto": "Cuando se termina de cosechar la soja – cierra campaña (el lote).\nDespués de que se coseche la soja, y ese lote va a maíz, todos esos costos se atribuyen al maíz (Controlan malezas, se mantiene el campo limpio) hasta que se siembra el maíz.",
 "peso": 0.9,
-"id": 201,
+"id": 214,
 "conceptos": {
 "ent:lote": 2,
 "ent:campania": 1,
@@ -2814,7 +3005,7 @@ export const GRAFO: Grafo = {
 "titulo": "Tema Herencia",
 "texto": "Cultivos de invierno – Cultivos de verano en esta zona (Soja, trigo). En la campaña agrícola hay doble cultivo, por ejemplo, trigo-soja; hay que definir si analizar por lote o por cultivo.\nMaíz (verano): siembra en septiembre, cosecha en marzo.\nSoja (verano): siembra en noviembre, cosecha en abril.\nTrigo (invierno): siembra a fines de mayo/principios de junio, cosecha a principios de noviembre/fines de diciembre.\nCebada, avena, lenteja: (invierno).\nVarían las condiciones.",
 "peso": 0.9,
-"id": 202,
+"id": 215,
 "conceptos": {
 "ent:lote": 1,
 "ent:campania": 1,
@@ -2828,7 +3019,7 @@ export const GRAFO: Grafo = {
 "titulo": "Proceso Principal",
 "texto": "1. Elegir lote.\n2. Sembrar.\n3. Aplicar fertilizante: (Haciendo el estudio de tierra o no).\n4. Aplicar insumos: (barbecho, dependiendo de las condiciones).\n5. Monitorear Insectos: (si hay, insecticida; si no, no aplicar).\n6. Cosechar.\n7. Fuera del alcance: Sacar humedad, suciedad, zaranda (procesos post-cosecha).\n8. Cerrar lote.",
 "peso": 0.9,
-"id": 203,
+"id": 216,
 "conceptos": {
 "cu:00": 1,
 "ent:lote": 2,
@@ -2844,7 +3035,7 @@ export const GRAFO: Grafo = {
 "titulo": "Cuando utilizar el barbecho (cuidar hasta la siembra)",
 "texto": "Herbicida: Depende del tamaño de maleza y cobertura. Estadio de maleza para tomar decisión.\nFertilizante: Análisis de suelo para saber la fertilidad del lote; según los minerales, los kilos a utilizar varían. SE HACE A LA SIEMBRA.\nInsecticidas: Manejo dinámico (ej. Bralex). Si hay 1 chinche por metro de surco se aplica, sino no.",
 "peso": 0.9,
-"id": 204,
+"id": 217,
 "conceptos": {
 "ent:lote": 1,
 "ent:insumo": 2,
@@ -2857,7 +3048,7 @@ export const GRAFO: Grafo = {
 "titulo": "Atributos importantes para las clases",
 "texto": "Distancia entre surcos: 52.5 cm (Dato a guardar como atributo de siembra). Permite calcular semillas por metro y semillas por hectárea.\nManejo de Stock: Control de insumos disponibles.\nParámetros de cosecha: Kilos por hectárea, Humedad de la cosecha, Rendimiento por lote.",
 "peso": 0.9,
-"id": 205,
+"id": 218,
 "conceptos": {
 "ent:lote": 1,
 "ent:semilla": 2,
